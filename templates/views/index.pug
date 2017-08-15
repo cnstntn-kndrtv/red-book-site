@@ -1,0 +1,42 @@
+extends ../layouts/default
+
+block content
+    .landing-header(style="background-image: url('/images/bg-book-1.jpeg');")
+        .container
+            .motto
+                img(src='/images/logo.png', width='160')
+                h1.title-uppercase
+                    | Красная книга 
+                    br
+                    | русского языка
+                hr
+                blockqoute
+                    p Истинная любовь к своей стране немыслима без любви к своему языку.
+                    small К. Паустовский
+
+    .section.section-nude.text-center
+        p Добро пожаловать на страничку
+        p 
+            |Позже тут появится приветственное слово 
+            |и какая-нибудь статистика про конкурс, 
+            |количество слов в словаре 
+            |и ссылки на основные разделы
+
+    .section.landing-section
+        .container
+            .row
+                .col-md-8.col-md-offset-2
+                    h2.text-center Keep in touch?
+                    form.contact-form
+                        .row
+                            .col-md-6
+                                label Name
+                                input.form-control(placeholder='Name')
+                            .col-md-6
+                                label Email
+                                input.form-control(placeholder='Email')
+                        label Message
+                        textarea.form-control(rows='4', placeholder='Tell us your thoughts and feelings...')
+                        .row
+                            .col-md-4.col-md-offset-4
+                                button.btn.btn-danger.btn-block.btn-lg.btn-fill Send Message
