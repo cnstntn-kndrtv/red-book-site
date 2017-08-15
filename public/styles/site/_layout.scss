@@ -1,7 +1,7 @@
-html, body {
+html,
+body {
     // max-width: 100%;
-    overflow-y: hidden;
-    // overflow-x: hidden;
+    overflow-y: hidden; // overflow-x: hidden;
 }
 
 #header {
@@ -10,76 +10,151 @@ html, body {
 
 .navbar {
     margin-bottom: 0 !important;
+    img {
+        height: 100%;
+    }
+    .active a {
+        color: tomato !important;
+    }
 }
 
-.navbar-brand img {
-    height: 100%;
-}
-
-.navbar-nav .active a {
-    color: red !important;
-}
 .landing-header {
-  background-size: cover;
-  min-height: 70vh;
+    background-size: cover;
+    min-height: 70vh;
+    
+    .motto {
+        padding-top: 8%;
+        text-align: left;
+        z-index: 3;
+        color: white;
+    }
+
+    h1 {
+        font-size: 63px;
+    }
 }
 
-.landing-header .motto {
-  padding-top: 8%;
-  text-align: left;
-  z-index: 3;
-  color: white;
+.dictionary {
+    background-size: cover;
+    min-height: 100vh;
 }
 
-.landing-header h1 {
-    font-size: 63px;
+.dictionary-search-field {
+    form input {
+        background-color: rgba(255, 255, 255, 0.5);
+        border-bottom: 3px solid white;
+        font-size: 1.825em;
+        height: 80px;
+    }
+    form input:focus {
+        border-color: #d6c1ab;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+    .search-button {
+        padding-left: 0;
+        button {
+            height: 80px;
+            font-size: 1.825em;
+        }
+    }
+    #abc-letters {
+        list-style: none;
+        margin-top: 15px;
+        padding-left: 0px;
+        li {
+            display: inline;
+        }
+        button {
+            font-size: 1.825em;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 2px solid white;
+            border-radius: 8px;
+        }
+        .active button {
+            background-color: white;
+            color: tomato;
+        }
+    }
+
+    #abc-words {
+        border-radius: 8px;
+        border: 2px solid white;
+        max-height: 65vh;
+        overflow-y: scroll;
+        background-color: rgba(255, 255, 255, 0.5);
+        ul {
+            padding: 0;
+            margin: 20px;
+        }
+        li {
+            list-style: none;
+            display: inline;
+        }
+        
+        .btn {
+            font-size: 1.4em;
+        }
+        
+    }
 }
 
-.landing-header.dictionary {
-  background-size: cover;
-  min-height: 100vh;
+#searchDropdown {
+    background-color: #d6c1ab;
+    color: white;
+    margin-top: -5px;
+    box-shadow: 0 20px 16px -15px rgba(165, 165, 165, 0.9);
+    border-radius: 1px;
+    position: absolute;
+    width: calc(100% - 30px);
+    z-index: 10;
+    ul {
+        padding: 0;
+    }
+    li {
+        list-style: none;
+        font-size: 1.85em;
+        padding-left: 10px;
+    }
+    li:hover,
+    .searchDropdownHover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
 }
 
-.dictionary-search-field form input{
-    background-color: rgba(255, 255, 255, 0.5);
-    border-bottom: 3px solid white;
-    font-size: 1.825em;
-    height: 80px;
-}
+#results {
+    border-radius: 8px;
+    box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+    background-color: #FFFFFF;
+    font-size: 1.85em;
+    margin-top: 10px;
+    padding: 20px;
+    overflow-y: scroll;
+    max-height: 65vh;
+    .morphology {
+        color: #ccc5b9;
+        font-size: 14px;
+    }
 
-.dictionary-search-field form input:focus{
-    border-color: red;
-    background-color: rgba(255, 255, 255, 0.9);
-}
-.dictionary-search-field .search-button {
-    padding-left: 0;
-}
-.dictionary-search-field .search-button button {
-    height: 80px;
-    font-size: 1.825em;
-}
-
-.dictionary-search-field .dictionary-letters {
-    list-style: none;
-    margin-top: 15px;
-    padding-left: 0px;
-}
-.dictionary-search-field .dictionary-letters li {
-    display: inline;
-}
-.dictionary-search-field .dictionary-letters button {
-    font-size: 1.825em;
-    background-color: rgba(255, 255, 255, 0.2);
+    .header {
+        color: #ccc5b9;
+        font-size: 0.7em;
+        margin-bottom: 5px;
+    }
+    
+    .meaning,
+    .example li {
+        text-indent: 10px;
+        padding-left: 10px;
+    }
 }
 
 #footer {
-    margin-top: 30px;
-    // border-top: 1px solid #eeeeee;
+    margin-top: 30px; // border-top: 1px solid #eeeeee;
     padding-top: 30px;
     color: #777777;
 }
 
-.gallery-image img{
+.gallery-image img {
     display: block;
     max-width: 100%;
     height: auto;

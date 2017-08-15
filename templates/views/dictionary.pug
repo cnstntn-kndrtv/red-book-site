@@ -1,29 +1,24 @@
 extends ../layouts/default
 
 block content
-    .landing-header.dictionary(style="background-image: url('/images/bg-book-3.jpg');")
-        .motto.container-fluid.row
-            .col-lg-6.col-lg-offset-3.col-sm-12.dictionary-search-field
-                .col-lg-10.col-md-10.col-sm-10.col-xs-10
-                    form
-                        input#searchInput.form-control(type='text', placeholder='Бить баклуши')
-                .col-lg-2.col-md-2.col-sm-2.col-xs-2.search-button
-                    button.btn.btn-neutral(type='submit') Найти
-                .col-lg-12.col-md-12.col-sm-12.col-xs-12
-                    ul.dictionary-letters
-                        each link in abc
-                            li
-                                button.btn.btn-simple(href='#')= link.label
+    .dictionary-body
+        .landing-header.dictionary(style="background-image: url('/images/bg-book-3.jpg');")
+            .motto.container-fluid.row
+                .col-lg-6.col-lg-offset-3.col-sm-12.dictionary-search-field
+                    .col-lg-10.col-md-10.col-sm-10.col-xs-10
+                        form#searchForm
+                            input#searchInput.form-control(type='text', placeholder='Бить баклуши')
+                            #searchDropdown
+                    .col-lg-2.col-md-2.col-sm-2.col-xs-2.search-button
+                        button#searchButton.btn.btn-neutral(type='submit') Найти
+                    .col-lg-12.col-md-12.col-sm-12.col-xs-12#abc
+                        ul#abc-letters
+                            each link in abc
+                                li
+                                    button.btn.btn-simple(onclick='changeAbcWords(this)')=link.label
+                        #abc-words
 
-
-            //- .col-lg-6.col-lg-offset-3.col-md-6.col-md-offset-3.col-sm-10.col-xs-10
-            //-     form
-            //-         input#searchInput.form-control(type='text', placeholder='Бить баклуши')
-            //- .col-lg-1.col-md-1.col-sm-1.col-xs-1.search-button
-            //-     button.btn.btn-neutral(type='submit') Найти
-            
-            //- .col-lg-12.col-md-12.col-sm-12.col-xs-12
-            //-     ul.dictionary-letters
-            //-         each link in abc
-            //-             li
-            //-                 a(href='#')= link.label
+            #results.col-lg-8.col-lg-offset-2.col-sm-12
+    
+    script(src="js/terms-list.js")
+    script(src="js/dictionary.js")
