@@ -4,7 +4,6 @@ require('dotenv').config();
 
 // Require keystone
 var keystone = require('keystone');
-var compression = require('compression');
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
