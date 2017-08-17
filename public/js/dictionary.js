@@ -16,42 +16,51 @@ var resultsContainer = document.querySelector('#results');
 resultsContainer.hidden = true;
 
 function searchInDictionary(term) {
-    searchDropdown.hidden = true;
-    let fakeResults = [
-            {
-                meaning: `значение слова ${term} #1`,
-                examples: [
-                    `example 1 ${term}`,
-                    `example 2 ${term}`,
-                ]
-            },
-            {
-                meaning: `значение слова ${term} это слово обозначает что-то что-то...`,
-                examples: [
-                    `example 1 ${term}`,
-                    `example 2 ${term}`,
-                    `example 3 ${term}`,
-                ]
-            },
-            {
-                meaning: `значение слова ${term} #1`,
-                examples: [
-                    `example 1 ${term}`,
-                    `example 2 ${term}`,
-                ]
-            },
-            {
-                meaning: `значение слова ${term} это слово обозначает что-то что-то...`,
-                examples: [
-                    `example 1 ${term}`,
-                    `example 2 ${term}`,
-                    `example 3 ${term}`,
-                ]
-            },
-        ]
+    term = term.toLowerCase();
+    if(terms.includes(term)) {
+        searchDropdown.hidden = true;
+        let fakeResults = [
+                {
+                    meaning: `значение слова ${term} #1`,
+                    examples: [
+                        `example 1 ${term}`,
+                        `example 2 ${term}`,
+                    ]
+                },
+                {
+                    meaning: `значение слова ${term} это слово обозначает что-то что-то...`,
+                    examples: [
+                        `example 1 ${term}`,
+                        `example 2 ${term}`,
+                        `example 3 ${term}`,
+                    ]
+                },
+                {
+                    meaning: `значение слова ${term} #1`,
+                    examples: [
+                        `example 1 ${term}`,
+                        `example 2 ${term}`,
+                    ]
+                },
+                {
+                    meaning: `значение слова ${term} это слово обозначает что-то что-то...`,
+                    examples: [
+                        `example 1 ${term}`,
+                        `example 2 ${term}`,
+                        `example 3 ${term}`,
+                    ]
+                },
+            ]
+        
+        createResultsView(term, fakeResults);
+
+    }
+}
+
+function createResultsView(term, res){
     let results = document.createElement('div');
     let word = document.createElement('div');
-    fakeResults.forEach((r) => {
+    res.forEach((r) => {
         word.innerText = term;
         let div = document.createElement('div');
         let hr = document.createElement('hr');
@@ -89,7 +98,7 @@ function searchInDictionary(term) {
         div.appendChild(examplesUl);
 
         results.appendChild(div);
-    })
+    });
     resultsContainer.innerHTML = '';
     resultsContainer.hidden = false;
     resultsContainer.appendChild(word);
@@ -148,7 +157,7 @@ function addFuzzySearchResults(query) {
     searchDropdown.innerHTML = '';
     let results = fuzzySearch(query);
     if (results.length > 0) {
-        abc.hidden = true;
+        abcContainer.hidden = true;
         searchDropdown.hidden = false;
         let ul = document.createElement('ul');
         ul.setAttribute('id', 'searchDropdownResults')
@@ -164,13 +173,14 @@ function addFuzzySearchResults(query) {
         searchDropdown.appendChild(ul);
         dropdownNavIndex = -1;
     }
-    else abc.hidden = false;
+    else abcContainer.hidden = false;
 }
 
 searchInput.onkeyup = (e) => {
     e.preventDefault();
     if(e.keyCode == 40) { navigateOnDropdown(1) }
     if(e.keyCode == 38) { navigateOnDropdown(-1) }
+    if(e.keyCode == 27) { searchInput.value = '' }
 }
 
 function navigateOnDropdown(diff) {
@@ -191,50 +201,104 @@ function navigateOnDropdown(diff) {
 
 function toggleLiClass(ul, activeLi, className) {
     ul.forEach((li) => {
-        if (li.nodeName == 'LI') li.removeAttribute('class', className);
+        if (li.nodeName == 'LI') {
+            li.removeAttribute('class', className);
+        }
     });
     activeLi.setAttribute('class', className);
 }
 
-var abc = document.querySelector('#abc');
-var abcWordsContainer = document.querySelector('#abc-words');
+var abcContainer = document.querySelector('#abc');
+var abcButtons = document.createElement('div');
+abcButtons.setAttribute('id', 'abc-letters');
+var abcWordsContainer = document.createElement('div');
+abcWordsContainer.setAttribute('id', 'abc-words');
 abcWordsContainer.hidden = true;
+abcContainer.appendChild(abcButtons);
+abcContainer.appendChild(abcWordsContainer);
+createAbcButtons();
 
-function changeAbcWords(that) {
+function createAbcButtons() {
+    let buttons = [
+        { label: 'А'},
+        { label: 'Б'},
+        { label: 'В'},
+        { label: 'Г'},
+        { label: 'Д'},
+        { label: 'Е-Ё'},
+        { label: 'Ж'},
+        { label: 'З'},
+        { label: 'И-Й'},
+        { label: 'К'},
+        { label: 'Л'},
+        { label: 'М'},
+        { label: 'Н'},
+        { label: 'О'},
+        { label: 'П'},
+        { label: 'Р'},
+        { label: 'С'},
+        { label: 'Т'},
+        { label: 'У-Я'},
+    ];
     let alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя';
-    let buttonText = that.innerText.toLowerCase();
-    let lettersUl = document.querySelector('#abc-letters');
-    toggleLiClass(lettersUl.childNodes, that.parentNode, 'active');
-    let letters = [];
-    if(buttonText.indexOf('-') > 0) {
-        let l = buttonText.split('-');
-        let firstIndex = alphabet.indexOf(l[0]);
-        let lastIndex = alphabet.indexOf(l[1]);
-        let range = alphabet.slice(firstIndex, lastIndex + 1);
-        letters = range.split('');
-    }
-    else letters.push(buttonText);
+    let abcButtonsUl = document.createElement('ul');
+    buttons.forEach((button) => {
+        button.words = [];
+        let letters = [];
+        if(button.label.indexOf('-') > 0) {
+            let l = button.label.split('-');
+            let firstIndex = alphabet.indexOf(l[0].toLocaleLowerCase());
+            let lastIndex = alphabet.indexOf(l[1].toLocaleLowerCase());
+            let range = alphabet.slice(firstIndex, lastIndex + 1);
+            letters = range.split('');
+        }
+        else letters.push(button.label);
+        terms.forEach((term) => {
+            term = term.toLowerCase();
+            let termTail = term.slice(1);
+            let termFirstLetter = term[0];
+            letters.forEach((letter) => {
+                if (termFirstLetter == letter.toLowerCase()) {
+                    button.words.push(termFirstLetter.toUpperCase() + termTail);
+                }
+            })
+        });
+        let li = document.createElement('li');
+        let btn = document.createElement('button');
+        if(button.words.length) {
+            btn.setAttribute('class', 'btn btn-simple');
+        }
+        else {
+            btn.setAttribute('class', 'empty btn btn-simple');
+        }
+        btn.onclick = () => changeAbcWords(button);
+        btn.innerText = button.label;
+        li.appendChild(btn);
+        button.element = li;
+        abcButtonsUl.appendChild(li);
+    });
+    abcButtons.appendChild(abcButtonsUl);
+}
+
+function changeAbcWords(button) {
     abcWordsContainer.innerHTML = '';
     let wordsUl = document.createElement('ul');
-    terms.forEach((term) => {
-        term = term.toLowerCase();
-        let termTail = term.slice(1);
-        let termFirstLetter = term[0];
-        letters.forEach((letter) => {
-            if (termFirstLetter == letter) {
-                let li = document.createElement('li');
-                let btn = document.createElement('a');
-                btn.setAttribute('class', 'btn btn-simple');
-                btn.innerText = termFirstLetter.toUpperCase() + termTail;
-                btn.onclick = () => {
-                    searchInput.value = term;
-                    searchInput.focus();
-                };
-                li.appendChild(btn);
-                wordsUl.appendChild(li);
-            }
-        })
-    });
+    if (button.words.length) {
+        let lettersUl = document.querySelector('#abc-letters');
+        toggleLiClass(lettersUl.childNodes[0].childNodes, button.element, 'active');
+        button.words.forEach((word) => {
+            let li = document.createElement('li');
+            let btn = document.createElement('a');
+            btn.setAttribute('class', 'btn btn-simple');
+            btn.innerText = word;
+            btn.onclick = () => {
+                searchInput.value = word;
+                searchInput.focus();
+            };
+            li.appendChild(btn);
+            wordsUl.appendChild(li);
+        });
+    }
     if (wordsUl.childElementCount > 0) {
         abcWordsContainer.appendChild(wordsUl);
         abcWordsContainer.hidden = false;
