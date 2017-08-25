@@ -5,7 +5,7 @@ let fileName = './public/js/terms-list.js';
 
 ldf.Logger.setLevel('error');
 
-var fragmentsClient = new ldf.FragmentsClient('http://localhost:3001/redbook');
+var fragmentsClient = new ldf.FragmentsClient('http://ldf.kloud.one/redbook');
 
 let term;
 term = 'разлад';
@@ -53,7 +53,9 @@ function getLiteral(l) {
 }
 
 function getPosTag(tag) {
-    return tag.replace('http://www.lexinfo.net/ontology/2.0/lexinfo#', '');
+    let posTag = null;
+    if(tag) posTag = tag.replace('http://www.lexinfo.net/ontology/2.0/lexinfo#', '');
+    return posTag;
 }
 
 r.on('data', (res) => {
@@ -69,7 +71,7 @@ r.on('data', (res) => {
             canonicalForm: null,
         }
     }
-    if(!results[id].meanings.hasOwnProperty(meaning)){
+    if(!results[id].meanings.hasOwnProperty(meaning) && meaning != null){
         results[id].meanings[meaning] = [];
     }
     if(usage){

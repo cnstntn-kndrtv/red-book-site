@@ -1,0 +1,18 @@
+version: "2"
+
+services:
+  web:
+    image: cnstntn/red-book-site
+    hostname: redbooksite
+    container_name: redbooksite
+    ports:
+      - "3005:3005"
+    links:
+      - mongo
+  
+  mongo:
+    image: mongo
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017:27017"
