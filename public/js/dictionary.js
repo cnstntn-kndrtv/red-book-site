@@ -18,92 +18,115 @@ resultsContainer.hidden = true;
 function searchInDictionary(term) {
     term = term.toLowerCase();
     if(terms.includes(term)) {
+        loader.hidden = false;
         searchDropdown.hidden = true;
+        socket.emit('query', term);
         let fakeResults = [
-                {
-                    meaning: `значение слова ${term} #1`,
-                    examples: [
-                        `example 1 ${term}`,
-                        `example 2 ${term}`,
-                    ]
-                },
-                {
-                    meaning: `значение слова ${term} это слово обозначает что-то что-то...`,
-                    examples: [
-                        `example 1 ${term}`,
-                        `example 2 ${term}`,
-                        `example 3 ${term}`,
-                    ]
-                },
-                {
-                    meaning: `значение слова ${term} #1`,
-                    examples: [
-                        `example 1 ${term}`,
-                        `example 2 ${term}`,
-                    ]
-                },
-                {
-                    meaning: `значение слова ${term} это слово обозначает что-то что-то...`,
-                    examples: [
-                        `example 1 ${term}`,
-                        `example 2 ${term}`,
-                        `example 3 ${term}`,
-                    ]
-                },
-            ]
-        
-        createResultsView(term, fakeResults);
+            {
+                meaning: `значение слова ${term} #1`,
+                examples: [
+                    `example 1 ${term}`,
+                    `example 2 ${term}`,
+                ]
+            },
+            {
+                meaning: `значение слова ${term} это слово обозначает что-то что-то...`,
+                examples: [
+                    `example 1 ${term}`,
+                    `example 2 ${term}`,
+                    `example 3 ${term}`,
+                ]
+            },
+            {
+                meaning: `значение слова ${term} #1`,
+                examples: [
+                    `example 1 ${term}`,
+                    `example 2 ${term}`,
+                ]
+            },
+            {
+                meaning: `значение слова ${term} это слово обозначает что-то что-то...`,
+                examples: [
+                    `example 1 ${term}`,
+                    `example 2 ${term}`,
+                    `example 3 ${term}`,
+                ]
+            },
+        ]
 
+        socket.on('data', (data) => {
+            loader.hidden = true;
+            createResultsView(term, data);
+        })
     }
 }
+
+var loader = document.querySelector('#loader');
+loader.hidden = true;
 
 function createResultsView(term, res){
     let results = document.createElement('div');
     let word = document.createElement('div');
-    res.forEach((r) => {
-        word.innerText = term;
-        let div = document.createElement('div');
-        let hr = document.createElement('hr');
-        // morphology
-        let morph = document.createElement('p')
-        morph.setAttribute('class', 'morphology');
-        morph.innerHTML = '<b>Морфологические свойства: </b>';
-        let morphProperties = document.createTextNode('noun animate etc');
-        morph.appendChild(morphProperties);
-        // meaning
-        let meaningHeader = document.createElement('div');
-        meaningHeader.setAttribute('class', 'header');
-        meaningHeader.innerText = 'Значение:';
-        let meaning = document.createElement('p');
-        meaning.setAttribute('class', 'meaning');
-        meaning.innerText = r.meaning;
-        // examples
-        let examplesHeader = document.createElement('div');
-        examplesHeader.setAttribute('class', 'header');
-        examplesHeader.innerText = 'Примеры употребления:';
-        let examplesUl = document.createElement('ul');
-        r.examples.forEach((example) => {
-            let li = document.createElement('li');
-            let p = document.createElement('p');
-            p.setAttribute('class', 'example');
-            p.innerText = example;
-            li.appendChild(p);
-            examplesUl.appendChild(li);
-        });
-        div.appendChild(hr);
-        div.appendChild(morph);
-        div.appendChild(meaningHeader);
-        div.appendChild(meaning);
-        div.appendChild(examplesHeader);
-        div.appendChild(examplesUl);
-
-        results.appendChild(div);
-    });
+    for (var posVariant in res) {
+        if (res.hasOwnProperty(posVariant)) {
+            var r = res[posVariant];
+            word.innerText = term;
+            let div = document.createElement('div');
+            let hr = document.createElement('hr');
+            // morphology
+            let morph = document.createElement('p');
+            morph.setAttribute('class', 'morphology');
+            morph.innerHTML = '<b>Часть речи: </b>';
+            let morphProperties = document.createTextNode(r.partOfSpeech);
+            morph.appendChild(morphProperties);
+            let meaningsContainer = document.createElement('div');
+            // meanings
+            for (var meaning in r.meanings) {
+                if (r.meanings.hasOwnProperty(meaning)) {
+                    // meaning
+                    let meaningHeader = document.createElement('div');
+                    meaningHeader.setAttribute('class', 'header');
+                    meaningHeader.innerText = 'Значение:';
+                    let meaningP = document.createElement('p');
+                    meaningP.setAttribute('class', 'meaning');
+                    // examples
+                    let examplesHeader = document.createElement('div');
+                    examplesHeader.setAttribute('class', 'header');
+                    let examplesUl = document.createElement('ul');
+                    let examples = r.meanings[meaning];
+                    meaningP.innerText = meaning;
+                    if(examples.length > 0) {
+                        examplesHeader.innerText = (examples.length == 1) ? 'Пример употребления:' : 'Примеры употребления:';
+                        examples.forEach((example) => {
+                            let li = document.createElement('li');
+                            let p = document.createElement('p');
+                            p.setAttribute('class', 'example');
+                            p.innerText = example;
+                            li.appendChild(p);
+                            examplesUl.appendChild(li);
+                        })
+                    }
+                    meaningsContainer.appendChild(meaningHeader);
+                    meaningsContainer.appendChild(meaningP);
+                    meaningsContainer.appendChild(examplesHeader);
+                    meaningsContainer.appendChild(examplesUl);
+                }
+            }
+            
+            div.appendChild(hr);
+            div.appendChild(morph);
+            div.appendChild(meaningsContainer);
+    
+            results.appendChild(div);
+            
+        }
+    }
     resultsContainer.innerHTML = '';
     resultsContainer.hidden = false;
     resultsContainer.appendChild(word);
     resultsContainer.appendChild(results);
 }
+
 
 function getBiGrams(string) {
     let s = string.toLowerCase();
@@ -306,3 +329,9 @@ function changeAbcWords(button) {
         abcWordsContainer.hidden = true;
     }
 }
+
+var socket = io();
+
+socket.on('error', (e) => {
+    console.log(e);
+})

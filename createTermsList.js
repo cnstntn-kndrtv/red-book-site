@@ -21,14 +21,14 @@ WHERE {
 
 let r = new ldf.SparqlIterator(q, { fragmentsClient: fragmentsClient });
 let n = 0;
-let results = [];
+let results = new Set;
 
 function getLiteral(l) {
     return (l) ? N3.Util.getLiteralValue(l) : null;
 }
 
 r.on('data', (result) => {
-    results.push( getLiteral( result['?wr'] ) );
+    results.add( getLiteral( result['?wr'] ) );
 });
 
 r.on('end', () => {
@@ -36,6 +36,7 @@ r.on('end', () => {
         if (exist) {
             fs.unlinkSync(fileName);
         }
+        results = Array.from(results);
         let content = 'var terms = ' + JSON.stringify(results);
         fs.appendFile(fileName, content, (error) => {
             if(error) console.log(error);

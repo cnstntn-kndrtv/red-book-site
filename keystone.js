@@ -14,7 +14,7 @@ keystone.init({
     'brand': 'red-book-site',
 
     'sass': 'public',
-    'static': 'public',
+    'static': ['public', 'node_modules/socket.io-client/dist'],
     'favicon': 'public/favicon.ico',
     'views': 'templates/views',
     'view engine': 'pug',
@@ -27,6 +27,8 @@ keystone.init({
     'user model': 'User',
 
     'compress': true,
+
+    'port': process.env.PORT,
 });
 
 
@@ -66,6 +68,5 @@ if (!process.env.MAILGUN_API_KEY || !process.env.MAILGUN_DOMAIN) {
     + '\n\nCreate a mailgun account and add the credentials to the .env file to'
     + '\nset up your mailgun integration');
 }
-
 
 keystone.start();

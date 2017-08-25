@@ -1,37 +1,32 @@
 var keystone = require('keystone');
+var {Query} = require('./../../Query');
 
 exports = module.exports = function (req, res) {
-
     var view = new keystone.View(req, res);
     var locals = res.locals;
 
     // locals.section is used to set the currently selected
     // item in the header navigation.
     locals.section = 'dictionary';
+    var io = require('socket.io')(keystone.httpServer);
 
-    res.locals.abc = [
-        { label: 'А'},
-        { label: 'Б'},
-        { label: 'В'},
-        { label: 'Г'},
-        { label: 'Д'},
-        { label: 'Е-Ё'},
-        { label: 'Ж'},
-        { label: 'З'},
-        { label: 'И-Й'},
-        { label: 'К'},
-        { label: 'Л'},
-        { label: 'М'},
-        { label: 'Н'},
-        { label: 'О'},
-        { label: 'П'},
-        { label: 'Р'},
-        { label: 'С'},
-        { label: 'Т'},
-        { label: 'У'},
-        { label: 'Ф-Я'},
-    ];
+    var query = new Query();
+
+    io.on(('connection'), (socket) => {
+        socket.on('query', (data) => {
+            query.get(data);
+        })
+    });
+
+    query.on('data', (data) => {
+        io.emit('data', data);
+    })
+
+    query.on('error', (error) => {
+        io.emit('error', error);
+    })
 
     // Render the view
     view.render('dictionary');
 };
+

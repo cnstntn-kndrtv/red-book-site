@@ -8703,7 +8703,7 @@ body {
 
 .dictionary {
   background-size: cover;
-  min-height: 100vh; }
+  min-height: 60vh; }
 
 .dictionary-search-field form input {
   background-color: rgba(255, 255, 255, 0.5);
@@ -8742,7 +8742,7 @@ body {
 .dictionary-search-field #abc #abc-words {
   border-radius: 8px;
   border: 2px solid white;
-  max-height: 65vh;
+  max-height: 20vh;
   overflow-y: scroll;
   background-color: rgba(255, 255, 255, 0.5); }
   .dictionary-search-field #abc #abc-words ul {
@@ -8773,15 +8773,12 @@ body {
   #searchDropdown .searchDropdownHover {
     background-color: rgba(255, 255, 255, 0.1); }
 
+.results-section {
+  min-height: 40vh; }
+
 #results {
-  border-radius: 8px;
-  box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
-  background-color: #FFFFFF;
   font-size: 1.85em;
-  margin-top: 10px;
-  padding: 20px;
-  overflow-y: scroll;
-  max-height: 65vh; }
+  padding: 20px; }
   #results .morphology {
     color: #ccc5b9;
     font-size: 14px; }
@@ -8803,3 +8800,28 @@ body {
   display: block;
   max-width: 100%;
   height: auto; }
+
+#loader {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  height: 60vh;
+  position: absolute;
+  top: 85px; }
+
+.loader {
+  border: 15px solid #f0f0f0;
+  border-top: 15px solid tomato;
+  border-bottom: 15px solid tomato;
+  border-right: 15px solid tomato;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin-left: calc(50% - 75px);
+  margin-top: calc(25% - 75px);
+  animation: preloaderSpin 5s linear infinite; }
+
+@keyframes preloaderSpin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
