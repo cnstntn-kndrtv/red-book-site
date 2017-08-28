@@ -2,16 +2,8 @@ version: "2"
 
 services:
 
-  mongo:
-    image: mongo
-    volumes:
-      - ./data/db:/data/db
-    ports:
-      - "27017:27017"
-  
   web:
     image: cnstntn/red-book-site
-    hostname: redbooksite
     container_name: redbooksite
     ports:
       - "3005:3005"
@@ -21,3 +13,13 @@ services:
       - MONGO_URI=mongo
       - NODE_ENV=production
       - PORT=3005
+    restart: always
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017:27017"
+    restart: always
