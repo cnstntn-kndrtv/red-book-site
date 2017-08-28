@@ -28,7 +28,7 @@ keystone.init({
 
     'compress': true,
 
-    'port': process.env.PORT,
+    'port': process.env.PORT || 3005,
 });
 
 
