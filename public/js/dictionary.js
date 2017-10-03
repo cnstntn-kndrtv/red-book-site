@@ -21,39 +21,6 @@ function searchInDictionary(term) {
         loader.hidden = false;
         searchDropdown.hidden = true;
         socket.emit('query', term);
-        let fakeResults = [
-            {
-                meaning: `значение слова ${term} #1`,
-                examples: [
-                    `example 1 ${term}`,
-                    `example 2 ${term}`,
-                ]
-            },
-            {
-                meaning: `значение слова ${term} это слово обозначает что-то что-то...`,
-                examples: [
-                    `example 1 ${term}`,
-                    `example 2 ${term}`,
-                    `example 3 ${term}`,
-                ]
-            },
-            {
-                meaning: `значение слова ${term} #1`,
-                examples: [
-                    `example 1 ${term}`,
-                    `example 2 ${term}`,
-                ]
-            },
-            {
-                meaning: `значение слова ${term} это слово обозначает что-то что-то...`,
-                examples: [
-                    `example 1 ${term}`,
-                    `example 2 ${term}`,
-                    `example 3 ${term}`,
-                ]
-            },
-        ]
-
         socket.on('data', (data) => {
             loader.hidden = true;
             createResultsView(term, data);
@@ -330,7 +297,7 @@ function changeAbcWords(button) {
     }
 }
 
-var socket = io();
+var socket = io({transports: ['websocket']});
 
 socket.on('error', (e) => {
     console.log(e);

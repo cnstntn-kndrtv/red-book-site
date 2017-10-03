@@ -8678,7 +8678,7 @@ textarea.form-control {
 
 html,
 body {
-  overflow-y: hidden; }
+  overflow-x: hidden; }
 
 #header {
   margin-top: 0px; }

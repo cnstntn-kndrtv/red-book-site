@@ -14,7 +14,7 @@ class MyEventEmitter {
 class Query extends MyEventEmitter {
     constructor() {
         super();
-        ldf.Logger.setLevel('info');
+        ldf.Logger.setLevel('error');
     }
 
     get(term) {
@@ -26,24 +26,25 @@ class Query extends MyEventEmitter {
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>
             PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+            PREFIX dc: <http://purl.org/dc/terms#>
             
             SELECT ?id ?meaning ?usage ?partOfSpeech ?canonicalForm
             WHERE {
                 ?id a ontolex:LexicalEntry ;
-                    ontolex:writtenRep "${term}"@ru ;
+                    ontolex:writtenRep "${term}"@ru .
                 OPTIONAL {
                     ?id ontolex:canonicalForm ?canonicalForm .
                 }
                 OPTIONAL {
-                    ?id ontolex:partOfSpeech ?partOfSpeech .
+                    ?id lexinfo:partOfSpeech ?partOfSpeech .
                 }
                 OPTIONAL {
-                    ?id ontolex:sense ?senseId .
+                    ?id dc:sense ?senseId .
                     ?senseId ontolex:reference ?referenceId .
                     ?referenceId rdf:value ?meaning .
                 }
                 OPTIONAL {
-                    ?id ontolex:sense ?senseId .
+                    ?id dc:sense ?senseId .
                     ?senseId ontolex:usage ?usageId .
                     ?usageId rdf:value ?usage .
                 }

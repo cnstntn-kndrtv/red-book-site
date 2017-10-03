@@ -1,7 +1,6 @@
 var ldf = require('ldf-client');
 var N3 = require('N3');
 var fs = require('fs');
-let fileName = './public/js/terms-list.js';
 
 ldf.Logger.setLevel('error');
 
@@ -27,10 +26,13 @@ function getLiteral(l) {
     return (l) ? N3.Util.getLiteralValue(l) : null;
 }
 
-r.on('data', (result) => {
-    results.add( getLiteral( result['?wr'] ) );
+r.on('data', (data) => {
+    results.add( getLiteral( data['?wr'] ) );
+    console.log('.');
 });
 
+
+let fileName = '../public/js/terms-list.js';
 r.on('end', () => {
     fs.exists(fileName, (exist) => {
         if (exist) {
