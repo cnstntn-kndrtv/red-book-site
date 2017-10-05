@@ -1,34 +1,59 @@
 extends ../layouts/default
 
 block intro
-	.container
-		h1 Contact Us
-		
+    .container
+        .row(style='margin-bottom: 32px; margin-top: 32px;')
+            .col-md-4
+                .title-container(style="display: flex; align-items: center; margin: 16px 0;")
+                    span.glyphicon.glyphicon-book(style="font-size: 24px;")
+                    h2(style="margin-left: 32px; margin: 0 0 0 16px;") Что?
+                p Цель нашего проекта  — привлечь ваше внимание к вопросу сохранения "вымирающих" слов русского языка, помочь ему оставаться столь же "великим и могучим", каким он был всегда.  
+                p Мы не пытаемся спасти безнадежно устаревшие слова, вышедшие из употребления давно и не без причины. Пытаться воскрешать динозавров бессмысленно и даже опасно! Мы занимаемся спасением тех слов и фразеологизмов, которые ещё совсем недавно были "на слуху" и на языке у каждого.  И чьё исчезновение из языка кажется нам неоправданным. 
+                p Забота о сохранении богатства языка имеет много общего с заботой об окружающей нас природе. Именно поэтому мы назвали наш проект "Красная книга русского языка". И эта идея кажется нам довольно удачной. А вам?
+            .col-md-4
+                .title-container(style="display: flex; align-items: center; margin: 16px 0;")
+                    span.glyphicon.glyphicon-floppy-saved(style="font-size: 24px;")
+                    h2(style="margin-left: 32px; margin: 0 0 0 16px;") Как?
+                p В первую очередь, мы собираем и классифицируем те языковые единицы, которые нуждаются в сохранении. Собранные слова и фразеологизмы будут внесены в свод-словник, который будет создан как в печатном, так и в телекоммуникационном варианте, в том числе и на данном портале.
+                p Результаты нашей работы будут активно внедряться в практику общественной письменной и устной речи. Продукт будет продвигаться в медийном и образовательном пространстве. В дополнение к созданному словарю будут подготовлены статьи в средствах массовой информации, интернет-посты и развивающие игры. В рамках проекта будет проведён интерактивный конкурс в формате видеоблоггинга на представление авторских микросюжетов на лингвоэкологическую тематику.
+            .col-md-4
+                .title-container(style="display: flex; align-items: center; margin: 16px 0;")
+                    span.glyphicon.glyphicon-user(style="font-size: 24px;")
+                    h2(style="margin-left: 32px; margin: 0 0 0 16px;") Кто?
+                p Мы — экологи русского языка. И нас уже довольно много. Наш проект связан и обеспечивается совместной деятельностью творческого коллектива, состоящего из специалистов-филологов, методистов кафедры филологии и журналистики Марийского государственного университета и профессиональных кадров группы компаний «Дигт-телеком». Группа компаний «Дигт-телеком» не только имеет современную материально-техническую базу, необходимую для реализации проекта, но и обладает профессиональным опытом и наработками в сфере IT-технологий, а также творческой командой IT-специалистов. 
+                p Включиться в нашу команду мы призываем и Вас. Знакомьтесь с нашим словарём, пополняйте свой лексический запас, принимайте участие в конкурсах, оставляйте ваши отзывы и рекомендации. Словом, чувствуйте себя как дома. Добро пожаловать! 
+
 block content
-	.container
-		if enquirySubmitted
-			h3 Thanks for getting in touch.
-		else
-			.row: .col-sm-8.col-md-6
-				form(method='post')
-					input(type='hidden', name='action', value='contact')
-					.form-group(class=validationErrors.name ? 'has-error' : null)
-						label Name
-						input(type='text', name='name.full', value=formData['name.full']).form-control
-					.form-group(class=validationErrors.email ? 'has-error' : null)
-						label Email
-						input(type='email', name='email', value=formData.email).form-control
-					.form-group
-						label Phone
-						input(type='text', name='phone', value=formData.phone, placeholder='(optional)').form-control
-					.form-group(class=validationErrors.enquiryType ? 'has-error' : null)
-						label What are you contacting us about?
-						select(name='enquiryType').form-control
-							option(value='') (select one)
-							each type in enquiryTypes
-								option(value=type.value, selected=formData.enquiryType == type.value)= type.label
-					.form-group(class=validationErrors.message ? 'has-error' : null)
-						label Message
-						textarea(name='message', placeholder='Leave us a message...' rows=4).form-control= formData.message
-					.form-actions
-						button(type='submit').btn.btn-primary Send
+    //- .container
+        .row
+            if enquirySubmitted
+                h3 Thanks for getting in touch.
+            else
+                .container(style="display: flex;align-items: center;flex-direction: column;")
+                    .row(style="background-color: #fff; padding: 16px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);    transition: all 0.3s cubic-bezier(.25,.8,.25,1);min-width: 628px;margin: 16px 0 32px 0;")
+                        form(method='post')
+                            legend(style="font-size: 32px;") Свяжитесь с нами
+                            .form-group(class=validationErrors.name ? 'has-error' : null)
+                                label Имя
+                                span(style="color: #BA0000; font-family: Verdana; font-size: 16px; font-weight: bold;") *
+                                input(type='text', name='name.full', value=formData['name.full'], placeholder='Введите имя').form-control
+                            .form-group(class=validationErrors.email ? 'has-error' : null)
+                                label Email
+                                span(style="color: #BA0000; font-family: Verdana; font-size: 16px; font-weight: bold;") *
+                                input(type='email', name='email', value=formData.email, placeholder='Введите электронный адрес').form-control
+                            .form-group
+                                label Телефон
+                                input(type='text', name='phone', value=formData.phone, placeholder='Введите ваш телефон').form-control
+                            .form-group(class=validationErrors.enquiryType ? 'has-error' : null)
+                                label По какой причине вы решили нам написать?
+                                span(style="color: #BA0000; font-family: Verdana; font-size: 16px; font-weight: bold;") *
+                                select(name='enquiryType').form-control
+                                    option(value='') (Выберите вариант)
+                                    each type in enquiryTypes
+                                        option(value=type.value, selected=formData.enquiryType == type.value)= type.label
+                            .form-group(class=validationErrors.message ? 'has-error' : null)
+                                label Комментарий
+                                span(style="color: #BA0000; font-family: Verdana; font-size: 16px; font-weight: bold;") *
+                                textarea(name='message', placeholder='Введите текст сообщения...' rows=4).form-control= formData.message
+                            .form-actions
+                                button(type='submit').btn.btn-primary Send

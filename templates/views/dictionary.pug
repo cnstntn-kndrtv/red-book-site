@@ -1,22 +1,23 @@
 extends ../layouts/default
 
 block content
-    .dictionary-body
-        .landing-header.dictionary(style="background-image: url('/images/bg-book-3.jpg');")
-            .motto.container-fluid.row
-                .col-lg-6.col-lg-offset-3.col-sm-12.dictionary-search-field
-                    .col-lg-10.col-md-10.col-sm-10.col-xs-10
-                        form#searchForm
-                            input#searchInput.form-control(type='text', autocomplete="off", placeholder='Бить баклуши')
-                            #searchDropdown
-                    .col-lg-2.col-md-2.col-sm-2.col-xs-2.search-button
-                        button#searchButton.btn.btn-neutral(type='submit') Найти
-                    .col-lg-12.col-md-12.col-sm-12.col-xs-12#abc
-            #loader
-                .loader
-        .col-lg-12.col-sm-12.col-xs-12.section-nude.results-section
-            #results.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-12.col-sm-offset-0.col-xs-12.col-xs-offset-0
-    
+    //- .dictionary-body
+    .landing-header.dictionary(style="background-image: url('/images/bg-book-3.jpg');")
+        .motto.container-fluid.row
+            .col-lg-6.col-lg-offset-3.col-sm-12.dictionary-search-field
+                .col-lg-10.col-md-10.col-sm-10.col-xs-10
+                    form#searchForm
+                        input#searchInput.form-control(type='text', autocomplete="off", placeholder='Бить баклуши')
+                        #searchDropdown
+                .col-lg-2.col-md-2.col-sm-2.col-xs-2.search-button
+                    button#searchButton.btn.btn-neutral(type='submit') Найти
+                .col-lg-12.col-md-12.col-sm-12.col-xs-12#abc
+        #loader
+            .loader
+    .section.section-nude.results-section.row
+        .col-lg-12.col-sm-12.col-xs-12
+            .container
+                #results.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-12.col-sm-offset-0.col-xs-12.col-xs-offset-0
     script(src="js/terms-list.js")
     script(src="socket.io.js")
     script(src="js/dictionary.js")

@@ -10,7 +10,7 @@ html
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
 
         title= title || 'red-book-site'
-        link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+        include ../mixins/favicon
 
         //- Customise the stylesheet for your site by editing /public/styles/site.sass
         link(href="/styles/site.css", rel="stylesheet")
@@ -40,18 +40,19 @@ html
 
             //- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
             //- ... or completely change this header to suit your design.
-
-            div(role="navigation").navbar.navbar-default
-                .container-fluid
+                        
+            nav.navbar.navbar-default(role='navigation-demo')
+                .container
                     .navbar-header
-                        button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+                        button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navigation')
                             span.sr-only Toggle navigation
                             span.icon-bar
                             span.icon-bar
                             span.icon-bar
                         a.navbar-brand(href='/')
                             img(alt='ККРЯ' src='/images/logo.png')
-                    .collapse.navbar-collapse
+                    
+                    #navigation.collapse.navbar-collapse
                         ul.nav.navbar-nav
                             each link in navLinks
                                 li(class=(section == link.key ? 'active' : null)): a.btn(href=link.href class=(link.style ? link.stye : 'btn-simple'))= link.label
@@ -76,14 +77,17 @@ html
         //- FOOTER
         .container-fluid.section-light-brown: #footer
             //- ul.nav.navbar-nav.navbar-left Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.
-            ul.nav.navbar-nav.navbar-right
-                    if user
-                        if user.canAccessKeystone
-                            li: a(href='/keystone') Открыть панель управления
-                        li: a(href='/keystone/signout') Выйти
-                    else
-                        li: a(href='/keystone/signin') Войти
-
+            .container
+                span Адрес электронной почты dev@digt.ru
+            //- ul.nav.navbar-nav.navbar-right
+            //-         if user
+            //-             if user.canAccessKeystone
+            //-                 li: a(href='/keystone') Открыть панель управления
+            //-             li: a(href='/keystone/signout') Выйти
+            //-         else
+            //-             li: a(href='/keystone/signin') Войти
+                    
+                    
 
         //- JAVASCRIPT
 
@@ -95,7 +99,7 @@ html
         //- Customise which Bootstrap javascript files are served by including
         //- them specifically here, instead of bootstrap-3.3.5.min.js
         script(src='/js/bootstrap/bootstrap-3.3.5.min.js')
-
+        script(src="/js/ct-paper.js")
         //- The KeystoneJS Content Editor provides support for ks-editable data attributes,
         //- which generate links to edit content for users who can access Keystone
         if user && user.canAccessKeystone
