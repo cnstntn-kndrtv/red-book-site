@@ -11,9 +11,16 @@ body {
 
 .navbar {
     margin-bottom: 0 !important;
+    .navbar-brand {
+        position: relative;
+    }
     img {
-        height: 400%;
-        margin-top: -15px;
+        margin-top: 10px;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
     }
     .active a {
         color: tomato !important;
@@ -32,6 +39,7 @@ p {
     
     .motto {
         padding-top: 5%;
+        padding-bottom: 5%;
         text-align: left;
         z-index: 3;
         color: white;
@@ -216,4 +224,8 @@ p {
 @keyframes preloaderSpin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.highlight {
+    background-color: olivedrab;
 }

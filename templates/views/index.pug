@@ -1,6 +1,7 @@
 extends ../layouts/default
 
 block content
+    link(href="/styles/cards.css", rel="stylesheet")
     .landing-header(style="background-image: url('/images/bg-book-1.jpg');")
         .container
             .motto
@@ -17,13 +18,13 @@ block content
     .section.section-nude.text-center
         .container
             .row
-                .col-md-8.col-md-offset-2.hello-word
+                .col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-12.col-xs-12.hello-word
                     h2 Добро пожаловать!
                     p
                         | На сайте "Красная книга русского языка" Вы найдете словарь редких слов, 
                         | которые сделают Вашу речь богатой и убедительной. 
-                        | <br><b>Давайте беречь русский язык вместе!<b>
-                    .col-md-4.col-md-offset-4
+                        | <br><b>Давайте беречь русский язык вместе!</b>
+                    .col-md-6.col-md-offset-3.col-sm-6.col-sm-offset-3.col-xs-12
                         a.btn.btn-danger.btn-block.btn-lg(href='/dictionary') Попробовать словарь
 
     .section
@@ -39,6 +40,75 @@ block content
                     
                     .col-md-4.col-sm-4.col-xs-12
                         img(src="/images/smartphone.png")
+    //- .section
+    //-     .container.row
+    //-         .col-md-6.highlight
+
+    //-             .perspective
+    //-                 #card-container
+    //-                     //- .message CLICK THE CARDS
+    //-                     .card.card-card1
+    //-                         .card__face.card__face--top
+    //-                             span.card__value
+    //-                             span.card__suit
+    //-                                 svg(width='21px', height='16px', viewbox='0 0 21 16', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+    //-                                     g#Page-1(stroke='none', stroke-width='1', fill='none', fill-rule='evenodd')
+    //-                                         path#Path-2(d='M1.6440972,15.2434886 L19.7934028,15.2434886 L10.71875,1.39282802 L1.6440972,15.2434886 Z', stroke='#635F5C')
+    //-                         .card__face.card__face--btm
+    //-                             span.card__value
+    //-                             span.card__suit
+    //-                                 svg(width='21px', height='16px', viewbox='0 0 21 16', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+    //-                                     g#Page-1(stroke='none', stroke-width='1', fill='none', fill-rule='evenodd')
+    //-                                         path#Path-2(d='M1.6440972,15.2434886 L19.7934028,15.2434886 L10.71875,1.39282802 L1.6440972,15.2434886 Z', stroke='#635F5C')
+    //-                     .card.card-card2
+    //-                         .card__face.card__face--top
+    //-                             span.card__value
+    //-                             span.card__suit
+    //-                                 svg(width='20px', height='21px', viewbox='0 0 20 21', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+    //-                                     g#Page-1(stroke='none', stroke-width='1', fill='none', fill-rule='evenodd')
+    //-                                         rect#Rectangle-3(stroke='#A68385', transform='translate(10.035534, 10.071068) rotate(-315.000000) translate(-10.035534, -10.071068) ', x='3.43933983', y='3.47487373', width='13.1923882', height='13.1923882')
+    //-                         .card__face.card__face--btm
+    //-                             span.card__value
+    //-                             span.card__suit
+    //-                                 svg(width='20px', height='21px', viewbox='0 0 20 21', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+    //-                                     g#Page-1(stroke='none', stroke-width='1', fill='none', fill-rule='evenodd')
+    //-                                         rect#Rectangle-3(stroke='#A68385', transform='translate(10.035534, 10.071068) rotate(-315.000000) translate(-10.035534, -10.071068) ', x='3.43933983', y='3.47487373', width='13.1923882', height='13.1923882')
+    //-                     .card.card-card3
+    //-                         .card__face.card__face--top
+    //-                             span.card__value
+    //-                             span.card__suit
+    //-                                 svg(width='21px', height='18px', viewbox='0 0 21 18', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+    //-                                     g#Page-1(stroke='none', stroke-width='1', fill='none', fill-rule='evenodd')
+    //-                                         circle#Oval(stroke='#635F5C', cx='4.5', cy='13.5', r='4')
+    //-                                         circle#Oval(stroke='#635F5C', cx='10.5', cy='4.5', r='4')
+    //-                                         circle#Oval(stroke='#635F5C', cx='16.5', cy='13.5', r='4')
+    //-                         .card__face.card__face--btm
+    //-                             span.card__value
+    //-                             span.card__suit
+    //-                                 svg(width='21px', height='18px', viewbox='0 0 21 18', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+    //-                                     g#Page-1(stroke='none', stroke-width='1', fill='none', fill-rule='evenodd')
+    //-                                         circle#Oval(stroke='#635F5C', cx='4.5', cy='13.5', r='4')
+    //-                                         circle#Oval(stroke='#635F5C', cx='10.5', cy='4.5', r='4')
+    //-                                         circle#Oval(stroke='#635F5C', cx='16.5', cy='13.5', r='4')
+    //-                     .card.card-card4
+    //-                         .card__face.card__face--top
+    //-                             span.card__value
+    //-                             span.card__suit
+    //-                                 svg(width='20px', height='16px', viewbox='0 0 20 16', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+    //-                                     g#Page-1(stroke='none', stroke-width='1', fill='none', fill-rule='evenodd')
+    //-                                         path#Path-2(d='M0.925347203,14.7630198 L19.0746528,14.7630198 L10,0.912359268 L0.925347203,14.7630198 Z', stroke='#A68385', transform='translate(10.000000, 7.631510) rotate(-180.000000) translate(-10.000000, -7.631510) ')
+    //-                         .card__face.card__face--btm
+    //-                             span.card__value
+    //-                             span.card__suit
+    //-                                 svg(width='20px', height='16px', viewbox='0 0 20 16', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink')
+    //-                                     g#Page-1(stroke='none', stroke-width='1', fill='none', fill-rule='evenodd')
+    //-                                         path#Path-2(d='M0.925347203,14.7630198 L19.0746528,14.7630198 L10,0.912359268 L0.925347203,14.7630198 Z', stroke='#A68385', transform='translate(10.000000, 7.631510) rotate(-180.000000) translate(-10.000000, -7.631510) ')
+    //- script.
+    //-     document.querySelector('#card-container').onclick = function(){
+    //-         this.classList.toggle("spread");
+        }
+
+
     //- .section.landing-section
     //-     .container
     //-         .row
