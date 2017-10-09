@@ -8683,35 +8683,41 @@ body {
 #header {
   margin-top: 0px; }
 
-.navbar {
-  margin-bottom: 0 !important; }
-  .navbar .navbar-brand {
-    position: relative; }
-  .navbar img {
+.navbar .navbar-brand {
+  position: relative; }
+  .navbar .navbar-brand img {
     margin-top: 10px;
     display: block;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%; }
-  .navbar a {
+
+.nav {
+  margin-bottom: 0 !important; }
+  .nav .social span {
+    margin-left: 5px; }
+  .nav .social img {
+    height: 20px !important;
+    width: 20px !important; }
+  .nav a {
     color: #462733 !important; }
-  .navbar a:hover {
+  .nav a:hover {
     color: #fb2720; }
-  .navbar .active a {
+  .nav .active a {
     color: #fb2720 !important; }
-  .navbar .active .btn-danger {
+  .nav .active .btn-danger {
     background-color: #fb2720 !important;
     color: white !important;
     border-color: #fb2720 !important; }
-  .navbar .btn-danger {
+  .nav .btn-danger {
     color: #45081f !important;
     border-color: #45081f !important; }
-  .navbar .btn-danger:hover {
+  .nav .btn-danger:hover {
     background-color: #fb2720 !important;
     color: white !important;
     border-color: #fb2720 !important; }
-  .navbar .btn-danger:focus {
+  .nav .btn-danger:focus {
     background-color: #fb2720 !important;
     color: white !important;
     border-color: #fb2720 !important; }
@@ -8735,6 +8741,9 @@ body > .navbar-collapse::after {
 
 p {
   line-height: 1.8em; }
+
+a img {
+  width: 100%; }
 
 .landing-header {
   background-size: cover;
@@ -8780,7 +8789,9 @@ p {
   padding-left: 0; }
   .dictionary-search-field .search-button button {
     height: 80px;
+    width: 100%;
     font-size: 1.825em;
+    font-weight: lighter;
     color: #66615B;
     border-color: #66615B; }
   .dictionary-search-field .search-button button:hover {
@@ -8873,7 +8884,7 @@ p {
   margin-top: 30px;
   padding-top: 30px;
   color: #777777;
-  height: 200px; }
+  min-height: 200px; }
 
 .gallery-image img {
   display: block;
@@ -8907,3 +8918,9 @@ p {
 
 .highlight {
   background-color: olivedrab; }
+
+.regalia .logo {
+  margin-bottom: 10px; }
+
+.text-danger {
+  color: #45081f !important; }

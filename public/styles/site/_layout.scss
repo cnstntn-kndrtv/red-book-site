@@ -8,12 +8,8 @@ body {
 #header {
     margin-top: 0px;
 }
-
-.navbar {
-    margin-bottom: 0 !important;
-    .navbar-brand {
-        position: relative;
-    }
+.navbar .navbar-brand {
+    position: relative;
     img {
         margin-top: 10px;
         display: block;
@@ -22,6 +18,28 @@ body {
         left: 0;
         width: 100%;
     }
+}
+.nav {
+    margin-bottom: 0 !important;
+    
+    .social{
+        span {
+            margin-left: 5px;
+        }
+
+        img {
+            height: 20px !important;
+            width: 20px !important;
+        }
+    }
+    // img {
+    //     margin-top: 10px;
+    //     display: block;
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     width: 100%;
+    // }
     a {
         color: #462733 !important;
     }
@@ -73,6 +91,10 @@ body > .navbar-collapse::after {
 }
 p {
     line-height: 1.8em;
+}
+
+a img {
+    width: 100%;
 }
 
 .landing-header {
@@ -131,7 +153,9 @@ p {
         padding-left: 0;
         button {
             height: 80px;
+            width: 100%;
             font-size: 1.825em;
+            font-weight: lighter;
             color: #66615B;
             border-color: #66615B;
         }
@@ -262,7 +286,7 @@ p {
     // border-top: 1px solid #eeeeee;
     padding-top: 30px;
     color: #777777;
-    height: 200px;
+    min-height: 200px;
 }
 
 .gallery-image img {
@@ -299,4 +323,21 @@ p {
 
 .highlight {
     background-color: olivedrab;
+}
+
+.regalia {
+    // position: relative;
+    .logo {
+        margin-bottom: 10px;
+    }
+    .content {
+        // width: 30vw;
+        // position: absolute;
+        // top: 0;
+        // left: 100px
+    }
+}
+
+.text-danger {
+    color: #45081f !important;
 }

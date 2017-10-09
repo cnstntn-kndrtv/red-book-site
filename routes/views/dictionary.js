@@ -1,58 +1,58 @@
 var keystone = require('keystone');
 var {Query} = require('./../../Query');
 var url = require('url');
-var isIo = false;
+var io;
 
-let myFunction = () => {
-    isIo = true;
+function initSocketIo() {
     io = require('socket.io')(keystone.httpServer);
+
     io.on(('connection'), function(socket) {
-        console.log('--connection', q, url.parse(req.url, true).query.query);
+
+        // console.log('--connection', q, require('url').parse(req.url, true).query.query);
+
+        let dictionary = new Query();
+
         socket.on('query', (data) => {
-            query.get(data);
+            dictionary.get(data);
         });
 
-        if(q != undefined) {
-            console.log('if', q)
-            queryFromURL.get(q);
-        }
-
-        queryFromURL.on('data', (data) => {
-            console.log('data', q, data);
-            io.emit('queryFromUrl', {'term': q, 'data': data});
+        socket.on('disconnect', () => {
+            dictionary.unsubscribe();
         });
+
+        dictionary.on('data', (data) => {
+            socket.emit('data', data);
+        })
+
+        dictionary.on('error', (error) => {
+            socket.emit('error', error);
+        })
     });
-
 }
 
 exports = module.exports = function (req, res) {
+    var url_parts = url.parse(req.url, true);
+    var q = url_parts.query.q;
+
+    if (!io) {
+        initSocketIo();
+    }
+
+    locals.section = 'dictionary';
     var view = new keystone.View(req, res);
     var locals = res.locals;
-
-    // locals.section is used to set the currently selected
-    // item in the header navigation.
-    locals.section = 'dictionary';
     
-    let query = new Query();
+    locals.query = q;
+    if (q != undefined) {
+        let dictionary = new Query();
+        dictionary.get(q);
+        dictionary.on('data', (data) => {
+            locals.data = data;
+            view.render('dictionary');
+        })
+    } else {
+        view.render('dictionary');
+    }
 
-    let queryFromURL = new Query();
-    var q = url.parse(req.url, true).query.query;
-
-    console.log('-----init', q);
-    
-    var io;
-    
-    if (!isIo) myFunction();
-
-    query.on('data', (data) => {
-        io.emit('data', data);
-    })
-
-    query.on('error', (error) => {
-        io.emit('error', error);
-    })
-
-    // Render the view
-    view.render('dictionary');
 };
 

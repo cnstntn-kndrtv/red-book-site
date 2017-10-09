@@ -2,12 +2,21 @@ var ldf = require('ldf-client');
 var N3 = require('n3');
 
 class MyEventEmitter {
-    on(type, cb) {
-        this['_on' + type] = this['_on' + type] || [];
-        this['_on' + type].push(cb);
+    constructor() {
+        this.events = {};
     }
+
+    on(type, cb) {
+        this.events['_on' + type] = this.events['_on' + type] || [];
+        this.events['_on' + type].push(cb);
+    }
+
     emit(type, args) {
-        this['_on' + type] && this['_on' + type].forEach((cb) => cb(args));
+        this.events['_on' + type] && this.events['_on' + type].forEach((cb) => cb(args));
+    }
+
+    unsubscribe() {
+        this.events = {};
     }
 }
 

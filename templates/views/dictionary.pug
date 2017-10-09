@@ -2,15 +2,17 @@ extends ../layouts/default
 
 block content
     .landing-header.dictionary(style="background-image: url('/images/bg-book-3.jpg');")
-        .motto.container-fluid.row
-            .col-lg-6.col-lg-offset-3.col-sm-12.dictionary-search-field
-                .col-lg-10.col-md-10.col-sm-10.col-xs-10
-                    form#searchForm
-                        input#searchInput.form-control(type='text', autocomplete="off", placeholder='Мракобес')
-                        #searchDropdown
-                .col-lg-2.col-md-2.col-sm-2.col-xs-2.search-button
-                    button#searchButton.btn.btn-neutral(type='submit') Найти
-                .col-lg-12.col-md-12.col-sm-12.col-xs-12#abc
+        .motto.container-fluid
+            .row
+                .col-lg-6.col-lg-offset-3.col-sm-12.dictionary-search-field
+                    .row
+                        .col-lg-10.col-md-10.col-sm-12.col-xs-12
+                            form#searchForm
+                                input#searchInput.form-control(type='text', autocomplete="off", placeholder='Мракобес')
+                                #searchDropdown
+                        .col-lg-2.col-md-2.col-sm-12.col-xs-12.search-button
+                            button#searchButton.btn.btn-neutral(type='submit') Найти
+                        .col-lg-12.col-md-12.col-sm-12.col-xs-12#abc
         #loader
             .loader
     .section.section-nude.results-section.row
@@ -19,6 +21,20 @@ block content
                 #results.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-12.col-sm-offset-0.col-xs-12.col-xs-offset-0
 
 block js
-    script(src="js/terms-list.js")
-    script(src="socket.io.js")
-    script(src="js/dictionary.js")
+    script.
+        var data = '#{JSON.stringify(data)}'
+        data = data.replace(/&quot;/g, '\"');
+        try {
+            data = JSON.parse(data);
+        } catch (e) {
+            data = {};
+        }
+        
+        var request = {
+            query: '#{query}',
+            data: data
+        }
+
+    script(src="./js/terms-list.js")
+    script(src="./socket.io.js")
+    script(src="./js/dictionary.js")

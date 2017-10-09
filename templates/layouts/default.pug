@@ -56,7 +56,14 @@ html
                         ul.nav.navbar-nav
                             each link in navLinks
                                 li(class=(section == link.key ? 'active' : null)): a.btn(href=link.href class=(link.style ? link.style : 'btn-simple'))= link.label
-
+                        
+                        ul.nav.navbar-nav.navbar-right
+                            li
+                                a(href="https://vk.com/rusredbook" target="_blank").btn.btn-simple.social
+                                    img(src="images/vk.png", alt="vkontakte")
+                            li
+                                a(href="https://www.facebook.com/rusredbook/" target="_blank").btn.btn-simple.social
+                                    img(src="images/fb.png", alt="facebook")
         //- BODY
         #body
             //- NOTE:
@@ -75,19 +82,41 @@ html
 
 
         //- FOOTER
-        .container-fluid.section-light-brown: #footer
-            //- ul.nav.navbar-nav.navbar-left Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.
+        footer.container-fluid.section-light-brown: #footer
             .container
-                span Адрес электронной почты dev@digt.ru
-            //- ul.nav.navbar-nav.navbar-right
-            //-         if user
-            //-             if user.canAccessKeystone
-            //-                 li: a(href='/keystone') Открыть панель управления
-            //-             li: a(href='/keystone/signout') Выйти
-            //-         else
-            //-             li: a(href='/keystone/signin') Войти
+                .row
+                    .regalia.col-lg-4.col-md-4.col-sm-4.col-xs-12
+                        img(src="images/marsu.png").logo
+                        .content Сайт создан лабораторией 'AI Labs'
+                            br
+                            a(href="https://marsu.ru" target='_blank').text-danger Марийского государственного университета
+                    .regalia.col-lg-4.col-md-4.col-sm-4.col-xs-12
+                        img(src="images/minobr.png").logo
+                        .content При поддержке Министерства Образования и Науки Российской Федерации
                     
-                    
+                    .col-lg-4.col-md-4.col-sm-4.col-xs-12
+                        ul.nav.navbar-nav
+                            li
+                                a(href="https://vk.com/rusredbook" target="_blank").btn.btn-simple.social
+                                    img(src="images/vk.png", alt="vkontakte")
+                                    span Вконтакте
+                            li
+                                a(href="https://www.facebook.com/rusredbook/" target="_blank").btn.btn-simple.social
+                                    img(src="images/fb.png", alt="facebook")
+                                    span Facebook
+                            li
+                                a(href='mailto:dev@digt.ru?subject=Сайт Красная книга русского языка').btn.btn-simple.social
+                                    img(src="images/email.png", alt="facebook")
+                                    span dev@digt.ru
+                            //- if user
+                            //-     if user.canAccessKeystone
+                            //-         li: a(href='/keystone').btn.btn-danger Открыть панель управления
+                            //-     li: a(href='/keystone/signout').btn.btn-danger Выйти
+                            //- else
+                            //-     li: a(href='/keystone/signin').btn.btn-danger Войти
+
+
+
 
         //- JAVASCRIPT
 
@@ -109,10 +138,38 @@ html
 
         //- google analytics
         script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-8058363-20')
-        //- script.
-        //-     function gtag(){dataLayer.push(arguments);}
-        //-     gtag('js', new Date());
-        //-     gtag('config', 'UA-8058363-20');
+        script.
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'UA-8058363-20');
+        
+        //- yandex metrics
+        script(type='text/javascript').
+            (function (d, w, c) {
+                try {
+                    w.yaCounter46215879 = new Ya.Metrika({
+                        id:46215879,
+                        clickmap:true,
+                        trackLinks:true,
+                        accurateTrackBounce:true
+                    });
+                } catch(e) { }
+            
+                var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = "https://mc.yandex.ru/metrika/watch.js";
+                if (w.opera == "[object Opera]") {
+                    d.addEventListener("DOMContentLoaded", f, false);
+                } else { f(); }
+            })(document, window, "yandex_metrika_callbacks");
+        
+        noscript
+            div
+                img(src='https://mc.yandex.ru/watch/46215879', style='position:absolute; left:-9999px;', alt='')
 
         
         //- Include template-specific javascript files by extending the js block
