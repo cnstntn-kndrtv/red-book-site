@@ -15,7 +15,12 @@ var searchDropdown = document.querySelector('#searchDropdown');
 var resultsContainer = document.querySelector('#results');
 resultsContainer.hidden = true;
 
+function firstToUpperCase(str) {
+    return str[0].toUpperCase() + str.slice(1);
+}
+
 function searchInDictionary(term) {
+    console.log('searchInDictionary', term)
     term = term.toLowerCase();
     if(terms.includes(term)) {
         loader.hidden = false;
@@ -37,7 +42,7 @@ function createResultsView(term, res){
     for (var posVariant in res) {
         if (res.hasOwnProperty(posVariant)) {
             var r = res[posVariant];
-            word.innerText = term;
+            word.innerText = firstToUpperCase(term);
             let div = document.createElement('div');
             let hr = document.createElement('hr');
             // morphology
@@ -93,7 +98,6 @@ function createResultsView(term, res){
     resultsContainer.appendChild(word);
     resultsContainer.appendChild(results);
 }
-
 
 function getBiGrams(string) {
     let s = string.toLowerCase();
@@ -198,16 +202,6 @@ function toggleLiClass(ul, activeLi, className) {
     activeLi.setAttribute('class', className);
 }
 
-var abcContainer = document.querySelector('#abc');
-var abcButtons = document.createElement('div');
-abcButtons.setAttribute('id', 'abc-letters');
-var abcWordsContainer = document.createElement('div');
-abcWordsContainer.setAttribute('id', 'abc-words');
-abcWordsContainer.hidden = true;
-abcContainer.appendChild(abcButtons);
-abcContainer.appendChild(abcWordsContainer);
-createAbcButtons();
-
 function createAbcButtons() {
     let buttons = [
         { label: 'А'},
@@ -284,6 +278,7 @@ function changeAbcWords(button) {
             btn.onclick = () => {
                 searchInput.value = word;
                 searchInput.focus();
+                searchInDictionary(word);
             };
             li.appendChild(btn);
             wordsUl.appendChild(li);
@@ -297,8 +292,28 @@ function changeAbcWords(button) {
     }
 }
 
+var abcContainer = document.querySelector('#abc');
+var abcButtons = document.createElement('div');
+abcButtons.setAttribute('id', 'abc-letters');
+var abcWordsContainer = document.createElement('div');
+abcWordsContainer.setAttribute('id', 'abc-words');
+abcWordsContainer.hidden = true;
+abcContainer.appendChild(abcButtons);
+abcContainer.appendChild(abcWordsContainer);
+createAbcButtons();
+
 var socket = io({transports: ['websocket']});
 
 socket.on('error', (e) => {
     console.log(e);
+})
+
+socket.on('query-from-url', (term, data) => {
+    console.log('query from url', term);
+    searchInput.value = term;
+    createResultsView(term, data);
+})
+
+socket.on('test', (m) => {
+    console.log(m)
 })

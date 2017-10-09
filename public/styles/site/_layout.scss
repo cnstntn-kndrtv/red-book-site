@@ -22,9 +22,51 @@ body {
         left: 0;
         width: 100%;
     }
-    .active a {
-        color: tomato !important;
+    a {
+        color: #462733 !important;
     }
+    a:hover {
+        color: #fb2720;
+    }
+    .active {
+        a {
+            color: #fb2720 !important;
+        }
+        .btn-danger {
+            background-color: #fb2720 !important;
+            color: white !important;
+            border-color: #fb2720 !important;
+        }
+    }
+    
+    .btn-danger {
+        color: #45081f !important;
+        border-color: #45081f !important;
+    }
+    .btn-danger:hover {
+        background-color: #fb2720 !important;
+        color: white !important;
+        border-color: #fb2720 !important;
+    }
+    .btn-danger:focus {
+        background-color: #fb2720 !important;
+        color: white !important;
+        border-color: #fb2720 !important;
+    }
+}
+.btn-danger {
+    color: #fb2720;
+    border-color: #fb2720;
+}
+.btn-danger:hover {
+    background-color: #fb2720;
+    color: white;
+    border-color: #fb2720;
+}
+.btn-danger:focus {
+    background-color: #fb2720;
+    color: white;
+    border-color: #fb2720;
 }
 body > .navbar-collapse::after {
     background-color: white;
@@ -42,7 +84,7 @@ p {
         padding-bottom: 5%;
         text-align: left;
         z-index: 3;
-        color: white;
+        color: #45081f;
     }
 
     img {
@@ -51,6 +93,10 @@ p {
 
     h1 {
         font-size: 63px;
+    }
+
+    hr {
+        border-color: rgba(69, 8, 31, 0.24);
     }
 }
 
@@ -71,15 +117,38 @@ p {
         font-size: 1.825em;
         height: 80px;
     }
+    form input::placeholder {
+        color: #b3b3b3;
+    }
     form input:focus {
-        border-color: #d6c1ab;
+        border-color: #66615B;
         background-color: rgba(255, 255, 255, 0.9);
+    }
+    form input:focus::placeholder {
+        color: white;
     }
     .search-button {
         padding-left: 0;
         button {
             height: 80px;
             font-size: 1.825em;
+            color: #66615B;
+            border-color: #66615B;
+        }
+        button:hover {
+            background-color: transparent;
+            color: white;
+            border-color: white;
+        }
+        button:active {
+            background-color: transparent !important;
+            color: white;
+            border-color: white;
+        }
+        button:focus {
+            background-color: transparent !important;
+            color: white;
+            border-color: white;
         }
     }
 
@@ -97,10 +166,11 @@ p {
                 border: 2px solid white;
                 border-radius: 8px;
                 margin: 5px;
+                color: #66615B;
             }
             .active button {
                 background-color: white;
-                color: tomato;
+                color: #45081f;
             }
             .empty {
                 color: rgba(255, 255, 255, 0.5);
@@ -126,6 +196,7 @@ p {
             
             .btn {
                 font-size: 1.4em;
+                color: #66615B;
             }
             
         }
@@ -209,10 +280,10 @@ p {
 }
 
 .loader {
-    border: 15px solid #f0f0f0;
-    border-top: 15px solid tomato;
-    border-bottom: 15px solid tomato;
-    border-right: 15px solid tomato;
+    border: 15px solid #fef4f5;
+    border-top: 15px solid #45081f;
+    border-bottom: 15px solid #45081f;
+    border-right: 15px solid #45081f;
     border-radius: 50%;
     width: 150px;
     height: 150px;

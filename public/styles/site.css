@@ -8694,8 +8694,41 @@ body {
     top: 0;
     left: 0;
     width: 100%; }
+  .navbar a {
+    color: #462733 !important; }
+  .navbar a:hover {
+    color: #fb2720; }
   .navbar .active a {
-    color: tomato !important; }
+    color: #fb2720 !important; }
+  .navbar .active .btn-danger {
+    background-color: #fb2720 !important;
+    color: white !important;
+    border-color: #fb2720 !important; }
+  .navbar .btn-danger {
+    color: #45081f !important;
+    border-color: #45081f !important; }
+  .navbar .btn-danger:hover {
+    background-color: #fb2720 !important;
+    color: white !important;
+    border-color: #fb2720 !important; }
+  .navbar .btn-danger:focus {
+    background-color: #fb2720 !important;
+    color: white !important;
+    border-color: #fb2720 !important; }
+
+.btn-danger {
+  color: #fb2720;
+  border-color: #fb2720; }
+
+.btn-danger:hover {
+  background-color: #fb2720;
+  color: white;
+  border-color: #fb2720; }
+
+.btn-danger:focus {
+  background-color: #fb2720;
+  color: white;
+  border-color: #fb2720; }
 
 body > .navbar-collapse::after {
   background-color: white; }
@@ -8711,11 +8744,13 @@ p {
     padding-bottom: 5%;
     text-align: left;
     z-index: 3;
-    color: white; }
+    color: #45081f; }
   .landing-header img {
     height: 100px; }
   .landing-header h1 {
     font-size: 63px; }
+  .landing-header hr {
+    border-color: rgba(69, 8, 31, 0.24); }
 
 .hello-word p {
   font-size: 18px;
@@ -8731,15 +8766,35 @@ p {
   font-size: 1.825em;
   height: 80px; }
 
+.dictionary-search-field form input::placeholder {
+  color: #b3b3b3; }
+
 .dictionary-search-field form input:focus {
-  border-color: #d6c1ab;
+  border-color: #66615B;
   background-color: rgba(255, 255, 255, 0.9); }
+
+.dictionary-search-field form input:focus::placeholder {
+  color: white; }
 
 .dictionary-search-field .search-button {
   padding-left: 0; }
   .dictionary-search-field .search-button button {
     height: 80px;
-    font-size: 1.825em; }
+    font-size: 1.825em;
+    color: #66615B;
+    border-color: #66615B; }
+  .dictionary-search-field .search-button button:hover {
+    background-color: transparent;
+    color: white;
+    border-color: white; }
+  .dictionary-search-field .search-button button:active {
+    background-color: transparent !important;
+    color: white;
+    border-color: white; }
+  .dictionary-search-field .search-button button:focus {
+    background-color: transparent !important;
+    color: white;
+    border-color: white; }
 
 .dictionary-search-field #abc #abc-letters {
   list-style: none;
@@ -8752,10 +8807,11 @@ p {
     background-color: rgba(255, 255, 255, 0.5);
     border: 2px solid white;
     border-radius: 8px;
-    margin: 5px; }
+    margin: 5px;
+    color: #66615B; }
   .dictionary-search-field #abc #abc-letters .active button {
     background-color: white;
-    color: tomato; }
+    color: #45081f; }
   .dictionary-search-field #abc #abc-letters .empty {
     color: rgba(255, 255, 255, 0.5); }
 
@@ -8773,7 +8829,8 @@ p {
     list-style: none;
     display: inline; }
   .dictionary-search-field #abc #abc-words .btn {
-    font-size: 1.4em; }
+    font-size: 1.4em;
+    color: #66615B; }
 
 #searchDropdown {
   background-color: #d6c1ab;
@@ -8831,10 +8888,10 @@ p {
   top: 85px; }
 
 .loader {
-  border: 15px solid #f0f0f0;
-  border-top: 15px solid tomato;
-  border-bottom: 15px solid tomato;
-  border-right: 15px solid tomato;
+  border: 15px solid #fef4f5;
+  border-top: 15px solid #45081f;
+  border-bottom: 15px solid #45081f;
+  border-right: 15px solid #45081f;
   border-radius: 50%;
   width: 150px;
   height: 150px;

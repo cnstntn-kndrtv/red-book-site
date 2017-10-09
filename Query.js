@@ -19,6 +19,7 @@ class Query extends MyEventEmitter {
 
     get(term) {
         term = term.toLowerCase();
+        console.log('query', term)
         let fragmentsClient = new ldf.FragmentsClient('http://ldf.kloud.one/redbook');
         let q = 
         `

@@ -22,7 +22,7 @@ exports.initLocals = function (req, res, next) {
         { label: 'О проекте', key: 'about', href: '/about' },
         // { label: 'Конкурс', key: 'contest', href: '/contest' },
         // { label: 'Новости', key: 'blog', href: '/blog' },
-        { label: 'Словарь', key: 'dictionary', href: '/dictionary', style: 'btn-warning'},
+        { label: 'Словарь', key: 'dictionary', href: '/dictionary', style: 'btn-danger'},
     ];
     res.locals.user = req.user;
     next();

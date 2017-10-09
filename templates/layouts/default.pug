@@ -55,7 +55,7 @@ html
                     #navigation.collapse.navbar-collapse
                         ul.nav.navbar-nav
                             each link in navLinks
-                                li(class=(section == link.key ? 'active' : null)): a.btn(href=link.href class=(link.style ? link.stye : 'btn-simple'))= link.label
+                                li(class=(section == link.key ? 'active' : null)): a.btn(href=link.href class=(link.style ? link.style : 'btn-simple'))= link.label
 
         //- BODY
         #body
@@ -109,10 +109,10 @@ html
 
         //- google analytics
         script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-8058363-20')
-        script.
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'UA-8058363-20');
+        //- script.
+        //-     function gtag(){dataLayer.push(arguments);}
+        //-     gtag('js', new Date());
+        //-     gtag('config', 'UA-8058363-20');
 
         
         //- Include template-specific javascript files by extending the js block
