@@ -313,7 +313,3 @@ socket.on('queryFromUrl', (data) => {
     searchInput.value = data.term;
     createResultsView(data.term, data.data);
 })
-
-socket.on('test', (m) => {
-    console.log(m)
-})
