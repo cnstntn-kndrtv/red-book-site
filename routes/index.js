@@ -40,6 +40,7 @@ exports = module.exports = function (app) {
     app.all('/about', routes.views.about);
     // app.all('/contest', routes.views.contest);
     app.all('/dictionary', routes.views.dictionary);
+    // app.all('/dictionary/:query?', routes.views.dictionary);
 
     // NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
     // app.get('/protected', middleware.requireUser, routes.views.protected);

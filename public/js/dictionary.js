@@ -308,10 +308,10 @@ socket.on('error', (e) => {
     console.log(e);
 })
 
-socket.on('query-from-url', (term, data) => {
-    console.log('query from url', term);
-    searchInput.value = term;
-    createResultsView(term, data);
+socket.on('queryFromUrl', (data) => {
+    console.log('query from url', data.term);
+    searchInput.value = data.term;
+    createResultsView(data.term, data.data);
 })
 
 socket.on('test', (m) => {

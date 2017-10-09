@@ -8,13 +8,17 @@ var keystone = require('keystone');
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
 // and documentation.
+var rootPath = process.cwd();
+console.log(rootPath);
 
 keystone.init({
     'name': 'red-book-site',
     'brand': 'red-book-site',
 
     'sass': 'public',
-    'static': ['public', 'node_modules/socket.io-client/dist'],
+    'static': [
+        rootPath + '/public',
+        rootPath + '/node_modules/socket.io-client/dist'],
     'favicon': 'public/images/favicon/favicon.ico',
     'views': 'templates/views',
     'view engine': 'pug',
