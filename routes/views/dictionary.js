@@ -1,5 +1,29 @@
 var keystone = require('keystone');
 var {Query} = require('./../../Query');
+var url = require('url');
+var isIo = false;
+
+let myFunction = () => {
+    isIo = true;
+    io = require('socket.io')(keystone.httpServer);
+    io.on(('connection'), function(socket) {
+        console.log('--connection', q, url.parse(req.url, true).query.query);
+        socket.on('query', (data) => {
+            query.get(data);
+        });
+
+        if(q != undefined) {
+            console.log('if', q)
+            queryFromURL.get(q);
+        }
+
+        queryFromURL.on('data', (data) => {
+            console.log('data', q, data);
+            io.emit('queryFromUrl', {'term': q, 'data': data});
+        });
+    });
+
+}
 
 exports = module.exports = function (req, res) {
     var view = new keystone.View(req, res);
@@ -8,32 +32,17 @@ exports = module.exports = function (req, res) {
     // locals.section is used to set the currently selected
     // item in the header navigation.
     locals.section = 'dictionary';
-    var io = require('socket.io')(keystone.httpServer);
-
+    
     let query = new Query();
 
     let queryFromURL = new Query();
-    // view.on('init', (next) => {
-    var q = require('url').parse(req.url, true).query.query;
+    var q = url.parse(req.url, true).query.query;
 
     console.log('-----init', q);
     
-    if(q != undefined) {
-        console.log('if', q)
-        queryFromURL.get(q);
-    }
-
-    io.on(('connection'), function(socket) {
-        console.log('--connection', q, require('url').parse(req.url, true).query.query);
-        socket.on('query', (data) => {
-            query.get(data);
-        });
-
-        queryFromURL.on('data', (data) => {
-            console.log('data', q, data);
-            io.emit('queryFromUrl', {'term': q, 'data': data});
-        });
-    });
+    var io;
+    
+    if (!isIo) myFunction();
 
     query.on('data', (data) => {
         io.emit('data', data);
@@ -43,9 +52,6 @@ exports = module.exports = function (req, res) {
         io.emit('error', error);
     })
 
-    //     next();
-
-    // })
     // Render the view
     view.render('dictionary');
 };
