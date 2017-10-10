@@ -31,26 +31,40 @@ function initSocketIo() {
 }
 
 exports = module.exports = function (req, res) {
+    console.log('VIEW')
+    var view = new keystone.View(req, res);
+    var locals = res.locals;
+
+    locals.section = 'dictionary';
+
     var url_parts = url.parse(req.url, true);
     var q = url_parts.query.q;
+    locals.query = q;
+    console.log('--q', q);
 
     if (!io) {
         initSocketIo();
     }
 
-    locals.section = 'dictionary';
-    var view = new keystone.View(req, res);
-    var locals = res.locals;
-    
-    locals.query = q;
     if (q != undefined) {
         let dictionary = new Query();
+        console.log('---if', q);
         dictionary.get(q);
         dictionary.on('data', (data) => {
             locals.data = data;
+            console.log('---render GET', q)
             view.render('dictionary');
+            dictionary.unsubscribe();
+        })
+        dictionary.on('error', (e) => {
+            locals.data = {};
+            console.log('---render ERROR', e)
+            view.render('dictionary');
+            dictionary.unsubscribe();
         })
     } else {
+        locals.data = {};
+        console.log('---render clean')
         view.render('dictionary');
     }
 
