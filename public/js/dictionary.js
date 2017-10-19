@@ -101,8 +101,10 @@ window.onload = function() {
         
         var shareLink = document.createElement('a');
         shareLink.innerText = 'Поделиться';
-        // var url = encodeURI('http://localhost:3005/dictionary?q="' + term + '"');
-        var url = encodeURI('http://rusredbook.ru/dictionary?q="' + term + '"');
+        // var baseUrl = 'http://localhost:3005/dictionary?q='
+        var baseUrl = 'http://rusredbook.ru/dictionary?q='
+        var term = escape('"' + term + '"');
+        var url = encodeURI(baseUrl + term);
         shareLink.setAttribute('href', url);
         shareLink.setAttribute('target', '_blank');
         shareLink.setAttribute('class', 'btn btn-danger pull-right');

@@ -39,7 +39,7 @@ exports = module.exports = function (req, res) {
 
     var url_parts = url.parse(req.url, true);
 
-    var q = decodeURIComponent(url_parts.query.q);
+    var q = unescape(url_parts.query.q);
     q = q.replace(/['"']/g, '');
     locals.query = q;
     console.log('--q', q);
