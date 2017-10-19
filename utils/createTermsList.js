@@ -1,5 +1,5 @@
 var ldf = require('ldf-client');
-var N3 = require('N3');
+var N3 = require('n3');
 var fs = require('fs');
 
 ldf.Logger.setLevel('error');
@@ -32,7 +32,7 @@ r.on('data', (data) => {
 });
 
 
-let fileName = '../public/js/terms-list.js';
+let fileName = './public/js/terms-list.js';
 r.on('end', () => {
     fs.exists(fileName, (exist) => {
         if (exist) {

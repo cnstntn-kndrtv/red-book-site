@@ -1,5 +1,5 @@
 var ldf = require('ldf-client');
-var N3 = require('N3');
+var N3 = require('n3');
 var fs = require('fs');
 let fileName = './public/js/terms-list.js';
 

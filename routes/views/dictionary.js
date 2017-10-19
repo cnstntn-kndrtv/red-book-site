@@ -38,7 +38,9 @@ exports = module.exports = function (req, res) {
     locals.section = 'dictionary';
 
     var url_parts = url.parse(req.url, true);
-    var q = url_parts.query.q;
+
+    var q = decodeURIComponent(url_parts.query.q);
+    q = q.replace(/['"']/g, '');
     locals.query = q;
     console.log('--q', q);
 

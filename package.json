@@ -23,7 +23,8 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "node keystone.js"
+    "start": "node keystone.js",
+    "update": "node utils/createTermsList"
   },
   "main": "keystone.js",
   "author": "Constantin Kondratyev",
