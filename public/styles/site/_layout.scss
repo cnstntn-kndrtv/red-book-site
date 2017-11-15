@@ -341,3 +341,16 @@ a img {
 .text-danger {
     color: #45081f !important;
 }
+#voiceSearch {
+  z-index: 100;
+  position: absolute;
+  right: 2rem;
+  font-size: 3rem;
+  border: none;
+  top: 2rem;
+  color: red;
+  background: none;
+}
+#voiceSearch:active {
+  color: darkred;
+}
