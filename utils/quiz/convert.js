@@ -486,14 +486,25 @@ let q = {
   }
 }
 
+/*
+"q": "Look at the following selector: $(\"div\")<br/> What does it select?",
+"a": "All div elements",
+"options": [
+    "All div elements",
+    "The first div element",
+    "All elements with the class \"div\""
+]
+*/
+
 let a = []
 
 for (let w in q) {
     let rec = {}
-    rec.term = w;
-    rec.answers = [];
+    rec.q = w;
+    rec.a = q[w]["1"]
+    rec.options = [];
     for (let v in q[w]) {
-        rec.answers.push(q[w][v])
+        rec.options.push(q[w][v])
     }
     a.push(rec)
 }

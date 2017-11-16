@@ -31,20 +31,20 @@
 
         /* Text
          ---------------------------*/
-        questionCount_text: "Question %current_index of %totalQuestions",
-        backButton_text: "Previous Question",
-        nextButton_text: "Next Question",
-        completeButton_text: "Finish Quiz",
-        viewResultsButton_text: "View Results",
-        resultsHeader_text: "Here's how you did.",
-        quizScore_text: "You answered %totalScore out of %totalQuestions questions correctly",
+        questionCount_text: "Вопрос %current_index из %totalQuestions",
+        backButton_text: "Предыдущий вопрос",
+        nextButton_text: "Следующий вопрос",
+        completeButton_text: "Завершить",
+        viewResultsButton_text: "Посмотреть результаты",
+        resultsHeader_text: "Ваши результаты.",
+        quizScore_text: "Вы ответили на %totalScore из %totalQuestions вопросов.",
         quizScoreMessage_text: "",
         quizScoreRank_text: {
-          a: "Perfect Score!",
-          b: "Great Job!",
-          c: "At least you passed.",
-          d: "Should have studied more.",
-          f: "Did you even try?"
+          a: "Отличный результат!",
+          b: "Хорошая работа!",
+          c: "Как минимум, вы прошли тест)).",
+          d: "Вам стоит лучше знать русский язык.",
+          f: "Неужели всё так плохо?"
         },
 
         /* Options
@@ -133,7 +133,7 @@
         //set questions
         questions = plugin.config.randomizeQuestions ? plugin.method.randomizeArray( quizData.questions ) : quizData.questions;
         //set question count
-        questionCount = questions.length;
+        questionCount = quizData.maxQuestions || questions.length;
 
         // add quiz class to $element
         if ( !$element.hasClass( "quiz" ) ) {
@@ -172,7 +172,8 @@
 
           //question title
           _quizHTML += '<h2 class="' + class_questionTitle + '">';
-          _quizHTML += question.q;
+          // _quizHTML += question.q;
+          _quizHTML += plugin.method.firstToUpperCase(question.q);
           _quizHTML += '</h2>';
 
           //answer options list
@@ -204,7 +205,8 @@
             _quizHTML += ' value="' + question.options[ a ] + '">';
 
             //input value
-            _quizHTML += question.options[ a ];
+            // _quizHTML += question.options[ a ];
+            _quizHTML += plugin.method.firstToUpperCase(question.options[ a ]);
             _quizHTML += '</label>';
             //end label
 
@@ -344,6 +346,9 @@
           //init view results button event
           plugin.events.resultsButton();
         }
+      },
+      firstToUpperCase: function(str) {
+        return str[0].toUpperCase() + str.slice(1);
       }
     };
     /*----------------------------
@@ -525,7 +530,7 @@
 
             //question
             resultsHTML += '<h3 class="questionTitle">';
-            resultsHTML += ( index + 1 ) + ". " + questions[ index ].q;
+            resultsHTML += ( index + 1 ) + ". " + plugin.method.firstToUpperCase(questions[ index ].q);
             resultsHTML += '</h3>';
 
             //show answer
@@ -533,19 +538,18 @@
             //if answer was incorrect
             if ( !questions[ index ].answerCorrect ) {
               //display user answer
-              resultsHTML += '<strong>Your Answer: </strong>';
-              resultsHTML += questions[ index ].selected + '<br>';
+              resultsHTML += '<strong>Ваш ответ: </strong>';
+              resultsHTML += plugin.method.firstToUpperCase(questions[ index ].selected) + '<br>';
             }
             //display correct answer
-            resultsHTML += '<strong>Correct Answer: </strong>';
-            resultsHTML += questions[ index ].a + '<br>';
+            resultsHTML += '<strong>Правильный ответ: </strong>';
+            resultsHTML += plugin.method.firstToUpperCase(questions[ index ].a) + '<br>';
             //close p tag
             resultsHTML += '</p>';
             resultsHTML += '</li>';
           } );
 
           resultsHTML += '</ul>';
-
           $( _quizResults ).append( resultsHTML );
 
         } );
