@@ -131,9 +131,10 @@
         //set quizData
         quizData = data;
         //set questions
-        questions = plugin.config.randomizeQuestions ? plugin.method.randomizeArray( quizData.questions ) : quizData.questions;
+        questions = plugin.method.createQuestions(quizData.questions, quizData.maxQuestions);
+        // questions = plugin.config.randomizeQuestions ? plugin.method.randomizeArray( quizData.questions ) : quizData.questions;
         //set question count
-        questionCount = quizData.maxQuestions || questions.length;
+        questionCount = questions.length;
 
         // add quiz class to $element
         if ( !$element.hasClass( "quiz" ) ) {
@@ -255,6 +256,13 @@
         plugin.events.init();
 
       },
+      createQuestions: function (questions, maxLength) {
+        if (maxLength < questions.length) {
+          let randomized = plugin.method.randomizeArray(questions);
+          return randomized.slice(0, maxLength);
+        } else return questions;
+      },
+
       randomizeArray: function ( array ) {
         var m = array.length,
           t, i;
