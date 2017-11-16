@@ -38,7 +38,7 @@ exports = module.exports = function (app) {
     // app.get('/blog/:category?', routes.views.blog);
     // app.get('/blog/post/:post', routes.views.post);
     app.all('/about', routes.views.about);
-    // app.all('/contest', routes.views.contest);
+    app.all('/contest', routes.views.contest);
     app.all('/dictionary', routes.views.dictionary);
 
     // NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
