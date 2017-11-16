@@ -21,8 +21,9 @@ exports.initLocals = function (req, res, next) {
     res.locals.navLinks = [
         { label: 'О проекте', key: 'about', href: '/about' },
         { label: 'Конкурс', key: 'contest', href: '/contest' },
+        { label: 'Пройти тест', key: 'quiz', href: '/quiz' },
         // { label: 'Новости', key: 'blog', href: '/blog' },
-        { label: 'Словарь', key: 'dictionary', href: '/dictionary', style: 'btn-danger'},
+        { label: 'Словарь', key: 'dictionary', href: '/dictionary', style: 'btn-danger' },
     ];
     res.locals.user = req.user;
     next();
