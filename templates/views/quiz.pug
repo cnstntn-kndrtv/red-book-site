@@ -1,0 +1,15 @@
+extends ../layouts/default
+
+block content
+    link(href="/styles/dlxquiz.css", rel="stylesheet")
+    .container
+        .row
+            .col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-12.col-xs-12
+                h1 Проверьте свои знания!
+                .quiz-container
+                    #quiz
+                    a(href="/quiz").btn.btn-fill.btn-danger Начать сначала
+    
+    script(src="./js/jquery/jquery-2.2.4.min.js")
+    script(src="./js/dlxquiz.js")
+    script(src="./js/quiz.js")
