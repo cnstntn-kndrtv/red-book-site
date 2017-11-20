@@ -1,9 +1,17 @@
 var keystone = require('keystone');
+var url = require('url');
 
 exports = module.exports = function (req, res) {
 
     var view = new keystone.View(req, res);
     var locals = res.locals;
+
+    var url_parts = url.parse(req.url, true);
+
+    var all = unescape(url_parts.query.all);
+    all = all.replace(/['"']/g, '');
+    locals.query = all;
+    console.log('--all', all);
 
     // locals.section is used to set the currently selected
     // item in the header navigation.
@@ -29,16 +37,18 @@ exports = module.exports = function (req, res) {
             let video = JSON.parse(msg);
 
             if ('links' in video) {
-                
-                video['links'].forEach((item) => {
-                    if (item) {
-                        locals.video.push(item);
-
-                        // let video = '<iframe src="' + item + '" width="800" height="600" frameborder="0" allowfullscreen></iframe>';
-                        // locals.video += video;
+                if (all == 1) {
+                    video['links'].forEach((item) => {
+                        if (item) {
+                            locals.video.push(item);
+                        }
+                    });
+                } else {
+                    if ( Array.isArray(video['links']) ) {
+                        locals.video = video['links'].slice(-9);
                     }
-                });
-                // console.log(video['links']);
+                    locals.btnAllVideo = true;
+                }
             }
         } catch (err) {
             console.log(err);
