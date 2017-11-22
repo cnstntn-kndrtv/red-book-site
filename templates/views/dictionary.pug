@@ -6,15 +6,17 @@ block content
             .row
                 .col-lg-6.col-lg-offset-3.col-sm-12.dictionary-search-field
                     .row
-                        .col-lg-10.col-md-10.col-sm-12.col-xs-12
+                        .col-lg-10.col-md-10.col-sm-10.col-xs-10
                             form#searchForm
                                 input#searchInput.form-control(type='text', autocomplete="off")
-                                a#voiceSearch.btn.btn-neutral
+                                a#voiceSearch.btn.btn-neutral.hidden-sm.hidden-xs
                                     span.glyphicon.glyphicon-record
                                 #searchDropdown
-                        .col-lg-2.col-md-2.col-sm-12.col-xs-12.search-button
-                            button#searchButton.btn.btn-neutral(type='submit') Найти
-                        .col-lg-12.col-md-12.col-sm-12.col-xs-12#abc
+                        .col-lg-2.col-md-2.col-sm-2.col-xs-2.search-button
+                            button#searchButton.btn.btn-neutral(type='submit') 
+                                span.hidden-sm.hidden-xs Найти
+                                span.visible-sm-block.visible-xs-block.glyphicon.glyphicon-search
+                        .col-lg-12.col-md-12.col-sm-12.col-xs-12.hidden-sm.hidden-xs#abc
         #loader
             .loader
     .section.section-nude.results-section.row

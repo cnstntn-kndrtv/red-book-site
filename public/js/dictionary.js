@@ -317,7 +317,7 @@ window.onload = function () {
                 btn.innerText = word;
                 btn.onclick = function () {
                     searchInput.value = word;
-                    searchInput.focus();
+                    // searchInput.focus();
                     searchInDictionary(word);
                 };
                 li.appendChild(btn);
