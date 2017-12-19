@@ -75,4 +75,10 @@ if (!process.env.MAILGUN_API_KEY || !process.env.MAILGUN_DOMAIN) {
     + '\nset up your mailgun integration');
 }
 
+// cron
+var updateTermsList = require('./utils/updateTermsList');
+var cronJob = require('cron').CronJob;
+
+new cronJob('* * 23 * * *', () => updateTermsList(), null, true, 'Europe/Moscow');
+
 keystone.start();

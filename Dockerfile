@@ -7,5 +7,5 @@ RUN npm install
 
 EXPOSE 3005
 
-CMD node createTermsList
-CMD npm start
+CMD npm run update
+CMD npm run start
