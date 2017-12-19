@@ -1,4 +1,5 @@
 window.onload = function () {
+    var hostName ='http://rusredbook.ru';
 
     var yandex_api_key = "bd06af90-5a4a-46cd-b30e-858aa999acc4";
     var recognizer, timer;
@@ -44,7 +45,7 @@ window.onload = function () {
 
     var resultsContainer = document.querySelector('#results');
     resultsContainer.hidden = true;
-
+    
     function firstToUpperCase(str) {
         return str[0].toUpperCase() + str.slice(1);
     }
@@ -129,11 +130,7 @@ window.onload = function () {
 
         var shareLink = document.createElement('a');
         shareLink.innerText = 'Поделиться';
-        // var baseUrl = 'http://localhost:3005/dictionary?q='
-        var baseUrl = 'http://rusredbook.ru/dictionary?q='
-        var term = escape('"' + term + '"');
-        var url = encodeURI(baseUrl + term);
-        shareLink.setAttribute('href', url);
+        shareLink.setAttribute('href', createQueryUrl(term));
         shareLink.setAttribute('target', '_blank');
         shareLink.setAttribute('class', 'btn btn-danger pull-right');
         resultsContainer.appendChild(shareLink);
@@ -304,6 +301,16 @@ window.onload = function () {
         abcButtons.appendChild(abcButtonsUl);
     }
 
+    function createQueryUrl(term) {
+        var baseUrl = hostName + '/dictionary?q='
+        var term = escape('"' + term + '"');
+        var url = encodeURI(baseUrl + term);
+        return url;
+    }
+
+    var isModernBrowser = (bowser.webkit || bowser.blink || bowser.gecko);
+    // var isModernBrowser = (bowser.webkit);
+
     function changeAbcWords(button) {
         abcWordsContainer.innerHTML = '';
         var wordsUl = document.createElement('ul');
@@ -315,11 +322,19 @@ window.onload = function () {
                 var btn = document.createElement('a');
                 btn.setAttribute('class', 'btn btn-simple');
                 btn.innerText = word;
-                btn.onclick = function () {
-                    searchInput.value = word;
-                    // searchInput.focus();
-                    searchInDictionary(word);
-                };
+
+                if (isModernBrowser) {
+                    btn.onclick = function () {
+                        searchInput.value = word;
+                        // searchInput.focus();
+                        searchInDictionary(word);
+                    }
+                }
+                else {
+                    btn.setAttribute('href', createQueryUrl(word));
+                }
+
+                
                 li.appendChild(btn);
                 wordsUl.appendChild(li);
             });

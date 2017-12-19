@@ -18,7 +18,9 @@ keystone.init({
     'sass': 'public',
     'static': [
         rootPath + '/public',
-        rootPath + '/node_modules/socket.io-client/dist'],
+        rootPath + '/node_modules/socket.io-client/dist',
+        rootPath + '/node_modules/bowser',
+    ],
     'favicon': 'public/images/favicon/favicon.ico',
     'views': 'templates/views',
     'view engine': 'pug',

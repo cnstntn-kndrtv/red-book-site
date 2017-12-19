@@ -4,6 +4,7 @@ var url = require('url');
 var io;
 
 function initSocketIo() {
+
     io = require('socket.io')(keystone.httpServer);
 
     io.on(('connection'), function(socket) {
@@ -31,7 +32,6 @@ function initSocketIo() {
 }
 
 exports = module.exports = function (req, res) {
-    console.log('VIEW')
     var view = new keystone.View(req, res);
     var locals = res.locals;
 
