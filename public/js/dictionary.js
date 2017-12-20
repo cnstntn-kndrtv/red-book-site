@@ -1,5 +1,9 @@
 window.onload = function () {
-    var hostName ='http://rusredbook.ru';
+
+    var hostName = location.origin;
+    var isSocketSupported = false;
+    isSocketSupported = (bowser.webkit || bowser.blink || bowser.gecko);
+    // isSocketSupported = (bowser.webkit || bowser.gecko);
 
     var yandex_api_key = "bd06af90-5a4a-46cd-b30e-858aa999acc4";
     var recognizer, timer;
@@ -56,11 +60,18 @@ window.onload = function () {
         if (terms.includes(term)) {
             loader.hidden = false;
             searchDropdown.hidden = true;
-            socket.emit('query', term);
-            socket.on('data', function (data) {
-                loader.hidden = true;
-                createResultsView(term, data);
-            })
+            if(isSocketSupported) {
+                socket.emit('query', term);
+                socket.on('data', function (data) {
+                    loader.hidden = true;
+                    createResultsView(term, data);
+                })
+            }
+            else {
+                console.log(location);
+                location = createQueryUrl(term);
+            }
+            
         }
     }
 
@@ -308,9 +319,6 @@ window.onload = function () {
         return url;
     }
 
-    var isModernBrowser = (bowser.webkit || bowser.blink || bowser.gecko);
-    // var isModernBrowser = (bowser.webkit);
-
     function changeAbcWords(button) {
         abcWordsContainer.innerHTML = '';
         var wordsUl = document.createElement('ul');
@@ -323,7 +331,7 @@ window.onload = function () {
                 btn.setAttribute('class', 'btn btn-simple');
                 btn.innerText = word;
 
-                if (isModernBrowser) {
+                if (isSocketSupported) {
                     btn.onclick = function () {
                         searchInput.value = word;
                         // searchInput.focus();
@@ -361,6 +369,7 @@ window.onload = function () {
 
     socket.on('error', function (e) {
         console.log(e);
+        isSocketSupported = false;
     })
 
     if (Object.keys(request.data).length > 0) {
