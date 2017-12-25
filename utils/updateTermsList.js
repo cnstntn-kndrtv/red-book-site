@@ -40,10 +40,13 @@ module.exports = function() {
                 fs.unlinkSync(fileName);
             }
             results = Array.from(results);
+            results.sort((a, b) => {
+                return (a < b) ? -1 : 1;
+            });
             let content = 'var terms = ' + JSON.stringify(results);
             fs.appendFile(fileName, content, (error) => {
                 if(error) console.log(error);
-                else console.log('done');
+                else console.log('done', results.length);
             });
         });
     });
