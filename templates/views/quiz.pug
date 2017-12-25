@@ -1,13 +1,23 @@
 extends ../layouts/default
 
 block content
-    link(href="/styles/dlxquiz.css", rel="stylesheet")
+    link(href="/styles/quiz.css", rel="stylesheet")
     .container
         .row
             .col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-12.col-xs-12
-                h1 Проверьте свои знания!
-                .quiz-container
-                    #quiz
+                h1#quizHeader Проверьте свои знания!
+                #quiz-chooser
+                    .row
+                        .col-lg-6.col-md-6.col-sm-12.col-xs-12
+                            .quiz-choose-card(onclick="showQuiz('quiz1')")
+                                h2 Какое слов пропущено в тексте?
+                        .col-lg-6.col-md-6.col-sm-12.col-xs-12
+                            .quiz-choose-card(onclick="showQuiz('quiz2')")
+                                h2 Знаете ли вы значение слова?
+                
+                #quiz-container
+                    #quiz1.quiz
+                    #quiz2.quiz
                     a(href="/quiz").btn.btn-fill.btn-danger Начать сначала
     
     script(src="./js/jquery/jquery-2.2.4.min.js")
