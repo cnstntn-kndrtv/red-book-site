@@ -16,6 +16,7 @@ exports = module.exports = function (req, res) {
     // locals.section is used to set the currently selected
     // item in the header navigation.
     locals.section = 'contest';
+    locals.title = 'Конкурс';
     locals.video = [];
     
     console.log(__dirname + '/../vk_get_video.js');

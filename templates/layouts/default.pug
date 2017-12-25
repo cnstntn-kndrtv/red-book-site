@@ -9,7 +9,7 @@ html
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
 
-        title= title || 'Красная книга русского языка'
+        title= (title) ? title + ' - Красная книга русского языка' : 'Красная книга русского языка'
         include ../mixins/favicon
 
         //- Customise the stylesheet for your site by editing /public/styles/site.sass

@@ -36,6 +36,7 @@ exports = module.exports = function (req, res) {
     var locals = res.locals;
 
     locals.section = 'dictionary';
+    locals.title = 'Словарь';
 
     var url_parts = url.parse(req.url, true);
 
@@ -48,13 +49,14 @@ exports = module.exports = function (req, res) {
         initSocketIo();
     }
 
-    if (q != undefined) {
+    if (q != 'undefined') {
         let dictionary = new Query();
         console.log('---if', q);
         dictionary.get(q);
         dictionary.on('data', (data) => {
             locals.data = data;
-            console.log('---render GET', q)
+            console.log('---render GET', q);
+            locals.title += ' - ' + q;
             view.render('dictionary');
             dictionary.unsubscribe();
         })

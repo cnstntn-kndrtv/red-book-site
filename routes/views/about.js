@@ -8,6 +8,7 @@ exports = module.exports = function (req, res) {
 
     // Set locals
     locals.section = 'about';
+    locals.title = 'О проекте';
     locals.enquiryTypes = Enquiry.fields.enquiryType.ops;
     locals.formData = req.body || {};
     locals.validationErrors = {};
