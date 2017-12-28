@@ -371,7 +371,12 @@ window.onload = function () {
         console.log(e);
         isSocketSupported = false;
     })
-
+    
+    socket.on('connect_failed', function (e) {
+        console.log(e);
+        isSocketSupported = false;
+    })
+    
     if (Object.keys(request.data).length > 0) {
         searchInput.value = request.query;
         createResultsView(request.query, request.data);
