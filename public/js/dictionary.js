@@ -4,7 +4,7 @@ window.onload = function () {
     var isSocketSupported = false;
     isSocketSupported = (bowser.webkit || bowser.blink || bowser.gecko);
     // isSocketSupported = (bowser.webkit || bowser.gecko);
-
+    
     var yandex_api_key = "bd06af90-5a4a-46cd-b30e-858aa999acc4";
     var recognizer, timer;
     window.ya.speechkit.settings.apikey = yandex_api_key;
@@ -55,7 +55,7 @@ window.onload = function () {
     }
 
     function searchInDictionary(term) {
-        console.log('searchInDictionary', term)
+        console.log('searchInDictionary', term, 'isSocketSupported', isSocketSupported);
         term = term.toLowerCase();
         if (terms.includes(term)) {
             loader.hidden = false;
@@ -365,15 +365,22 @@ window.onload = function () {
     abcContainer.appendChild(abcWordsContainer);
     createAbcButtons();
 
-    var socket = io({ transports: ['websocket'] });
 
+    try {
+        var socket = io(location.origin);
+        // var socket = io({ transports: ['websocket'] });
+    } catch (error) {
+        console.log('try-catch-error', error);
+        isSocketSupported = false;
+    }
+    
     socket.on('error', function (e) {
-        console.log(e);
+        console.log('error', e);
         isSocketSupported = false;
     })
     
     socket.on('connect_failed', function (e) {
-        console.log(e);
+        console.log('connect_failed', e);
         isSocketSupported = false;
     })
     
