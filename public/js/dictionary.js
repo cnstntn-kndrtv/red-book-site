@@ -68,7 +68,6 @@ window.onload = function () {
                 })
             }
             else {
-                console.log(location);
                 location = createQueryUrl(term);
             }
             
@@ -365,24 +364,37 @@ window.onload = function () {
     abcContainer.appendChild(abcWordsContainer);
     createAbcButtons();
 
-
+    isSocketSupported = false;
     try {
-        var socket = io(location.origin);
-        // var socket = io({ transports: ['websocket'] });
+        // var socket = io(location.origin);
+        var socket = io({ transports: ['websocket'] });
+        
+        socket.on('connect', function() {
+            console.log('connected')
+            isSocketSupported = true;
+        })
+
+        socket.on('error', function (e) {
+            console.log('error', e);
+            isSocketSupported = false;
+        })
+        
+        socket.on('connect_failed', function (e) {
+            console.log('connect_failed', e);
+            isSocketSupported = false;
+        })
+
+        socket.on('disconnect', function (e) {
+            console.log('disconnect', e);
+            isSocketSupported = false;
+        })
+
+
     } catch (error) {
         console.log('try-catch-error', error);
         isSocketSupported = false;
     }
     
-    socket.on('error', function (e) {
-        console.log('error', e);
-        isSocketSupported = false;
-    })
-    
-    socket.on('connect_failed', function (e) {
-        console.log('connect_failed', e);
-        isSocketSupported = false;
-    })
     
     if (Object.keys(request.data).length > 0) {
         searchInput.value = request.query;
