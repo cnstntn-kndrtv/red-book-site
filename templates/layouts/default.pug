@@ -150,7 +150,26 @@ html
             function gtag(){ dataLayer.push(arguments); }
             gtag('js', new Date());
             gtag('config', 'UA-8058363-20');
-        
+
+        script.
+            function clickToImageVideo(item) {
+                var plugVideo = document.getElementById(item.id);
+
+                var iframeVideo = document.createElement("iframe");
+                iframeVideo.width ="229px";
+                iframeVideo.height ="153px";
+                iframeVideo.src= item.id;
+                iframeVideo.frameborder="0";
+                iframeVideo.setAttribute("allowFullScreen", "");
+                iframeVideo.setAttribute("max-height", "153px;");
+
+                var parent = plugVideo.parentNode;
+                while (parent.firstChild) { 
+                    parent.removeChild(parent.firstChild); 
+                }
+                parent.appendChild(iframeVideo);
+            }
+
         //- yandex metrics
         script(type='text/javascript').
             (function (d, w, c) {
