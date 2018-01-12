@@ -39,7 +39,7 @@ window.onload = function () {
                 }
             },
             errorCallback: function (err) {
-                alert(JSON.stringify(err));
+                alert("К сожалению, Ваш браузер не поддерживает эту функцию");
             },
             utteranceSilence: 50
         });
