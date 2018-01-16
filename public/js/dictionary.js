@@ -39,7 +39,7 @@ window.onload = function () {
                 }
             },
             errorCallback: function (err) {
-                alert(JSON.stringify(err));
+                alert("К сожалению, Ваш браузер не поддерживает эту функцию");
             },
             utteranceSilence: 50
         });
@@ -129,6 +129,13 @@ window.onload = function () {
                 div.appendChild(hr);
                 div.appendChild(morph);
                 div.appendChild(meaningsContainer);
+                var audioElement = document.createElement('audio');
+                audioElement.setAttribute("src", 'http://dev.kloud.one:5000/uploads/'+term+'.mp3');
+                audioElement.setAttribute("controls", true);
+                audioElement.onerror = function () {
+                    audioElement.style.display = "none";
+                }
+                div.append(audioElement);
                 results.appendChild(div);
 
             }
