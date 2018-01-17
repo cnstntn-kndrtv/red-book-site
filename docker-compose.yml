@@ -9,6 +9,8 @@ services:
       - "3005:3005"
     links:
       - mongo
+    volumes:
+      - ./data/cert:/data/cert
     environment:
       - MONGO_URI=mongo
       - NODE_ENV=production
@@ -20,7 +22,6 @@ services:
     container_name: mongo
     volumes:
       - ./data/db:/data/db
-      - ./data/cert:/data/cert
     ports:
       - "27017:27017"
     restart: always
