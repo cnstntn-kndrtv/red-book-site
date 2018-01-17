@@ -11,6 +11,7 @@ WORKDIR /red-book-site
 RUN npm install
 
 EXPOSE 3005
+EXPOSE 443
 VOLUME /data/cert
 
 CMD npm run update
