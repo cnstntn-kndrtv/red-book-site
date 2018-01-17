@@ -40,11 +40,10 @@ keystone.init({
     'ssl': true,
     'ssl key': '/data/cert/rusredbook.key',
     'ssl cert': '/data/cert/rusredbook.crt',
-    'ssl port': 3005,
+    'ssl port': 443,
 
     'headless': true // disable admin panel
 });
-
 
 // Load your project's Models
 keystone.import('models');
@@ -89,4 +88,8 @@ var cronJob = require('cron').CronJob;
 
 new cronJob('* * 23 * * *', () => updateTermsList(), null, true, 'Europe/Moscow');
 
-keystone.start();
+keystone.start({
+    onHttpsServerCreated: function(){
+        console.log('HTTPS!!!!');
+    }
+});
