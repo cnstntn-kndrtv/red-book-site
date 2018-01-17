@@ -35,6 +35,10 @@ keystone.init({
     'compress': true,
 
     'port': process.env.PORT || 3005,
+
+    'ssl': true,
+    'ssl key': '/data/cert/rusredbook.key',
+    'ssl cert': '/data/cert/rusredbook.crt'
 });
 
 
