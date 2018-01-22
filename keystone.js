@@ -40,6 +40,8 @@ keystone.init({
     'ssl': true,
     'ssl key': '/data/cert/rusredbook.key',
     'ssl cert': '/data/cert/rusredbook.crt',
+    // 'ssl key': './data/cert/localhost.key',
+    // 'ssl cert': './data/cert/localhost.crt',
     'ssl port': 443,
 
     'headless': true // disable admin panel

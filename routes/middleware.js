@@ -9,6 +9,15 @@
  */
 var _ = require('lodash');
 
+/**
+ Redirect to https
+ */
+exports.redirectToFullDomainName = function(req, res, next) {
+    if(req.protocol === 'http') {
+        return res.redirect('https://' + req.hostname + req.url);
+    }
+    next();
+};
 
 /**
     Initialises the standard view locals
