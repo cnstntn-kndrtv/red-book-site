@@ -130,7 +130,8 @@ window.onload = function () {
                 div.appendChild(morph);
                 div.appendChild(meaningsContainer);
                 var audioElement = document.createElement('audio');
-                audioElement.setAttribute("src", 'http://dev.kloud.one:5000/uploads/'+term+'.mp3');
+                var fileName = term.toLowerCase() + '.mp3';
+                audioElement.setAttribute("src", 'http://dev.kloud.one:5000/uploads/' + fileName);
                 audioElement.setAttribute("controls", true);
                 audioElement.onerror = function () {
                     audioElement.style.display = "none";
