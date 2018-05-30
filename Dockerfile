@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:8-slim
 
 RUN apt-get update && \
     apt-get install mc -y
