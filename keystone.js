@@ -42,7 +42,7 @@ keystone.init({
     'ssl cert': '/data/cert/rusredbook.crt',
     // 'ssl key': './data/cert/localhost.key',
     // 'ssl cert': './data/cert/localhost.crt',
-    'ssl port': 443,
+    'ssl port': 3443,
 
     'headless': true // disable admin panel
 });
