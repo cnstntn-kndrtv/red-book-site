@@ -15,6 +15,7 @@ services:
       - MONGO_URI=mongo
       - NODE_ENV=production
       - PORT=3005
+      - SSL=TRUE
     restart: always
 
   mongo:

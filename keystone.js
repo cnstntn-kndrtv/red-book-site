@@ -10,8 +10,7 @@ var keystone = require('keystone');
 // and documentation.
 var rootPath = process.cwd();
 console.log(rootPath);
-
-keystone.init({
+let params = {
     'name': 'red-book-site',
     'brand': 'red-book-site',
 
@@ -34,18 +33,26 @@ keystone.init({
 
     'compress': true,
 
-    // 'port': process.env.PORT || 3005,
-    'port': 3005,
-
-    'ssl': true,
-    'ssl key': '/data/cert/rusredbook.key',
-    'ssl cert': '/data/cert/rusredbook.crt',
-    // 'ssl key': './data/cert/localhost.key',
-    // 'ssl cert': './data/cert/localhost.crt',
-    'ssl port': 3443,
+    'port': process.env.PORT || 3005,
+    // 'port': 3005,
 
     'headless': true // disable admin panel
-});
+}
+
+if (process.env.SSL == 'TRUE') {
+    params['ssl'] = true;
+    params['ssl port'] = process.env.SSL_PORT || 3443;
+    
+    params['ssl key'] = '/data/cert/rusredbook.key';
+    params['ssl cert'] = '/data/cert/rusredbook.crt';
+    
+    // params['ssl key'] = './data/cert/localhost.key';
+    // params['ssl cert'] = './data/cert/localhost.crt';
+}
+
+console.log(params);
+
+keystone.init(params);
 
 // Load your project's Models
 keystone.import('models');
