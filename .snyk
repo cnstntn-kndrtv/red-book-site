@@ -1,0 +1,22 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:hoek:20180212':
+    - keystone > less-middleware > less > request > hawk > hoek:
+        patched: '2018-12-06T09:08:09.185Z'
+    - keystone > less-middleware > less > request > hawk > boom > hoek:
+        patched: '2018-12-06T09:08:09.185Z'
+    - keystone > less-middleware > less > request > hawk > sntp > hoek:
+        patched: '2018-12-06T09:08:09.185Z'
+    - keystone > less-middleware > less > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-12-06T09:08:09.185Z'
+  'npm:lodash:20180130':
+    - keystone > asyncdi > lodash:
+        patched: '2018-12-06T09:08:09.185Z'
+    - keystone > grappling-hook > lodash:
+        patched: '2018-12-06T09:08:09.185Z'
+  'npm:uglify-js:20151024':
+    - keystone > jade > transformers > uglify-js:
+        patched: '2018-12-06T09:08:09.185Z'
