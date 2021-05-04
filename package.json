@@ -15,8 +15,8 @@
     "node-sass": "4.5.0",
     "node-sass-middleware": "0.11.0",
     "pug": "2.0.0-beta11",
-    "socket.io": "^2.0.3",
-    "socket.io-client": "^2.0.3",
+    "socket.io": "^3.0.0",
+    "socket.io-client": "^4.0.0",
     "ursa": "^0.9.4",
     "vksdk": "^5.3.2"
   },
